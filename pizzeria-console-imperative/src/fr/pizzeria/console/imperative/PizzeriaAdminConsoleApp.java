@@ -22,7 +22,7 @@ public class PizzeriaAdminConsoleApp {
 		System.out.println("***** Pizzeria Administration *****");
 		System.out.println("1. Lister les pizzas");
 		System.out.println("2. Ajouter une nouvelle pizza");
-		System.out.println("3. Mettre à jor une pizza");
+		System.out.println("3. Mettre à jour une pizza");
 		System.out.println("4. Supprimer une pizza");
 		System.out.println("99. Sortir");
 		int nb = sc.nextInt();
@@ -60,14 +60,11 @@ public class PizzeriaAdminConsoleApp {
 		}
 		System.out.println("choisissez une pizza a mettre a jour");
 		String scanMiseAJour = sc.next();
-		if(scanMiseAJour=="99"){
-			break;
-		}
 		System.out.println("choisissez le nouveau code");
 		scanMiseAJour = sc.next();
 		int PizzaMiseAJour=0;
 		for(int i=0;i<100; i++){
-		if(pizza[i][0]!=scanMiseAJour){
+		if(pizza[i][0]==scanMiseAJour){
 			PizzaMiseAJour = i;
 		}
 		}
@@ -76,7 +73,7 @@ public class PizzeriaAdminConsoleApp {
 		scanMiseAJour = sc.next();
 		pizza[PizzaMiseAJour][1]	=scanMiseAJour;
 		System.out.println("choisissez le nouveau prix");
-		pizza[PizzaMiseAJour][1]	=sc.nextInt();;
+		pizza[PizzaMiseAJour][2]	=sc.nextDouble();;
 	
 			break;
 		case (4) : 
