@@ -1,5 +1,8 @@
 package fr.pizzeria.dao;
 
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.SavePizzaExeption;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
@@ -25,33 +28,59 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 
 	@Override
-	public boolean savePizza(Pizza newPizza) {
+	public void savePizza(Pizza newPizza) throws SavePizzaExeption {
 		boolean placeTrouve = false;
 		int index = 0;
 		while (!placeTrouve && index < pizzas.length) {
 			placeTrouve = pizzas[index] == null;
-			if(!placeTrouve){
-			index++;
+			if (!placeTrouve) {
+				index++;
 			}
 		}
 
 		if (placeTrouve) {
 			pizzas[index] = newPizza;
-			//Pizza.nbPizzas++;}
+		}else {
+			throw new SavePizzaExeption("erreur de création");
 		}
-		return placeTrouve;
 	}
 
 	@Override
-	public boolean updatePizza(String codePizza, Pizza updatePizza) {
-		// TODO Auto-generated method stub
-		return false;
+	public void updatePizza(String codePizza, Pizza updatePizza)throws UpdatePizzaException {
+		
+		try {
+			this.deletePizza(codePizza);
+		} catch (DeletePizzaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.savePizza(updatePizza);
+		} catch (SavePizzaExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
-	public boolean deletePizza(String codePizza) {
-		// TODO Auto-generated method stub
-		return false;
+	public void deletePizza(String codePizza)throws DeletePizzaException {
+		boolean pizzaTrouve = false;
+		int index = 0;
+		while (!pizzaTrouve && index < pizzas.length) {
+			if(pizzas[index]!=null){
+				pizzaTrouve = codePizza.equals(pizzas[index].code);
+			}
+			if (!pizzaTrouve) {
+				index++;
+			}
+		}
+
+		if (pizzaTrouve) {
+			pizzas[index] = null;
+		}else {
+			throw new DeletePizzaException("erreur de suppresion");
+		}
 	}
 
 }

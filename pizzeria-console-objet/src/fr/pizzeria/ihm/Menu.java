@@ -3,9 +3,11 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.ihm.menu.option.AbstractOptionMenu;
 import fr.pizzeria.ihm.menu.option.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
+import fr.pizzeria.ihm.menu.option.ModifierPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.QuitterOptionMenu;
 import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
 
@@ -27,6 +29,7 @@ public class Menu {
 		options = new AbstractOptionMenu[] { 
 				new ListerPizzaOptionMenu(pizzaDao), 
 				new AjouterPizzaOptionMenu(sc,pizzaDao),
+				new ModifierPizzaOptionMenu(sc, pizzaDao),
 				new SupprimerPizzaOptionMenu(sc, pizzaDao),
 				new QuitterOptionMenu()
 				};
@@ -42,7 +45,9 @@ public void afficher(){
 
 		}
 		int saisie = sc.nextInt();
+		
 		continuer = options[saisie].execute();
+		
 	}
 	
 }
