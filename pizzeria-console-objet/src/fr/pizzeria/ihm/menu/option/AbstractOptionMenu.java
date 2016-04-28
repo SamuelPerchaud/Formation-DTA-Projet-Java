@@ -16,6 +16,7 @@ public abstract class AbstractOptionMenu {
 	public AbstractOptionMenu(String libelle,IPizzaDao pizzaDao) {
 		super();
 		this.libelle = libelle;
+		this.pizzaDao = pizzaDao;
 	}
 
 	public String getLibelle() {

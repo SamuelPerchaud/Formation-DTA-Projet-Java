@@ -5,7 +5,7 @@ import fr.pizzeria.model.Pizza;
 
 public class ListerPizzaOptionMenu extends AbstractOptionMenu {
 
-	private static final String LISTER_PIZZAS_LIBELLE_MENU = "Lister Pizzas";
+	private static final String LISTER_PIZZAS_LIBELLE_MENU = "Lister les Pizzas";
 
 	public ListerPizzaOptionMenu(IPizzaDao pizzaDao) {
 		super(LISTER_PIZZAS_LIBELLE_MENU, pizzaDao);
