@@ -2,9 +2,9 @@ package fr.pizzeria.console;
 
 public class Pizza {
 	int id;
-	String code;
-	String nom;
-	double prix;
+	public String code;
+	public String nom;
+	public double prix;
 	static int nbPizzas;
 	/**
 	 * @param code
