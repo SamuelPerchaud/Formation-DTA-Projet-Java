@@ -9,6 +9,10 @@ public class Pizza {
 		this.prix = prix;
 	}
 
+	public Pizza() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int id;
 	public String code;
 	public String nom;

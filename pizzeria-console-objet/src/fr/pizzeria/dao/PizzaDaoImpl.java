@@ -3,7 +3,7 @@ package fr.pizzeria.dao;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
-	
+
 	private Pizza[] pizzas = new Pizza[100];
 
 	public PizzaDaoImpl() {
@@ -16,7 +16,6 @@ public class PizzaDaoImpl implements IPizzaDao {
 		pizzas[6] = new Pizza("ORI", "L'orientale", 13.50);
 		pizzas[7] = new Pizza("IND", "L'indienne", 14.00);
 	}
-	
 
 	@Override
 	public Pizza[] findAllPizzas() {
@@ -27,8 +26,20 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public boolean savePizza(Pizza newPizza) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean placeTrouve = false;
+		int index = 0;
+		while (!placeTrouve && index < pizzas.length) {
+			placeTrouve = pizzas[index] == null;
+			if(!placeTrouve){
+			index++;
+			}
+		}
+
+		if (placeTrouve) {
+			pizzas[index] = newPizza;
+			//Pizza.nbPizzas++;}
+		}
+		return placeTrouve;
 	}
 
 	@Override

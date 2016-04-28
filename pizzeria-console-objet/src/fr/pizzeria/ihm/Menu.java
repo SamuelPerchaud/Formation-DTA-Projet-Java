@@ -4,8 +4,10 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.ihm.menu.option.AbstractOptionMenu;
+import fr.pizzeria.ihm.menu.option.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.QuitterOptionMenu;
+import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
 
 public class Menu {
 
@@ -24,7 +26,10 @@ public class Menu {
 	private void initializeOptions(Scanner sc,IPizzaDao pizzaDao) {
 		options = new AbstractOptionMenu[] { 
 				new ListerPizzaOptionMenu(pizzaDao), 
-				new QuitterOptionMenu() };
+				new AjouterPizzaOptionMenu(sc,pizzaDao),
+				new SupprimerPizzaOptionMenu(sc, pizzaDao),
+				new QuitterOptionMenu()
+				};
 	}
 
 public void afficher(){
