@@ -2,11 +2,13 @@ package fr.pizzeria.model;
 
 public class Pizza {
 
-	public Pizza(String code, String nom, double prix) {
+	public Pizza(String code, String nom, double prix,TypePizza type) {
 		super();
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
+		this.type = type;
+		
 	}
 
 	public Pizza() {
@@ -18,4 +20,5 @@ public class Pizza {
 	public String nom;
 	public double prix;
 	public static int nbPizzas;
+	public TypePizza type;
 }
