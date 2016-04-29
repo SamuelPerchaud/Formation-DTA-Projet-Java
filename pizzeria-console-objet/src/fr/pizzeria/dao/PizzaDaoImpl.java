@@ -1,6 +1,6 @@
 package fr.pizzeria.dao;
 
-import java.util.*;
+//import java.util.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +37,12 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public void savePizza(Pizza newPizza) throws SavePizzaExeption {
+		if(!pizzas.containsKey(newPizza.code)){
 		pizzas.put(newPizza.code,newPizza);
+		}else {
+			throw new SavePizzaExeption("erreur de création: pizza deja presente");
+
+					}
 		/*boolean placeTrouve = false;
 		int index = 0;
 		while (!placeTrouve && index < pizzas.length) {
@@ -77,6 +82,9 @@ public class PizzaDaoImpl implements IPizzaDao {
 		
 		if(pizzas.containsKey(codePizza)){
 			pizzas.remove(codePizza);
+		}else {
+			throw new DeletePizzaException("erreur de suppresion, pas de pizza trouvé");
+
 		}
 		/*
 		boolean pizzaTrouve = false;

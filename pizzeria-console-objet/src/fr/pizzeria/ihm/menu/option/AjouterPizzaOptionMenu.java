@@ -11,7 +11,7 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 	private static final String AJOUTER_PIZZAS_LIBELLE_MENU = "ajouter une Pizzas";
 	private Scanner sc;
 
-	public AjouterPizzaOptionMenu(Scanner sc,IPizzaDao pizzaDao) {
+	public AjouterPizzaOptionMenu(Scanner sc, IPizzaDao pizzaDao) {
 		super(AJOUTER_PIZZAS_LIBELLE_MENU, pizzaDao);
 		this.sc = sc;
 	}
@@ -25,16 +25,16 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 		newPizza.nom = sc.next();
 		System.out.println("entré le prix de la nouvelle pizza");
 		newPizza.prix = sc.nextDouble();
-		
+
 		boolean resultat = true;
-		
+
 		try {
 			pizzaDao.savePizza(newPizza);
 		} catch (DaoException e) {
-			// TODO Auto-generated catch block
+			System.err.println("erreur sur la methode savepizza");
 			e.printStackTrace();
 		}
-		
+
 		return resultat;
 	}
 
