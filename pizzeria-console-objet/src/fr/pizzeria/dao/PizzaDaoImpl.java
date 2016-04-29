@@ -1,5 +1,12 @@
 package fr.pizzeria.dao;
 
+import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaExeption;
 import fr.pizzeria.exception.UpdatePizzaException;
@@ -7,29 +14,31 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
 
-	private Pizza[] pizzas = new Pizza[100];
+	private Map<String,Pizza> pizzas = new HashMap<String,Pizza>();
 
 	public PizzaDaoImpl() {
-		pizzas[0] = new Pizza("PEP", "Pépéroni", 12.50);
-		pizzas[1] = new Pizza("MAR", "Margherita", 14.00);
-		pizzas[2] = new Pizza("REI", "La Reine", 11.50);
-		pizzas[3] = new Pizza("FRO", "La 4 fromages", 12.00);
-		pizzas[4] = new Pizza("CAN", "La cannibale", 12.50);
-		pizzas[5] = new Pizza("SAV", "La savoyarde", 13.00);
-		pizzas[6] = new Pizza("ORI", "L'orientale", 13.50);
-		pizzas[7] = new Pizza("IND", "L'indienne", 14.00);
+		pizzas.put("PEP",new Pizza("PEP", "Pépéroni", 12.50));
+		pizzas.put("MAR",new Pizza("MAR", "Margherita", 14.00));
+		pizzas.put("REI",new Pizza("REI", "La Reine", 11.50));
+		pizzas.put("FRO",new Pizza("FRO", "La 4 fromages", 12.00));
+		pizzas.put("CAN",new Pizza("CAN", "La cannibale", 12.50));
+		pizzas.put("SAV",new Pizza("SAV", "La savoyarde", 13.00));
+		pizzas.put("ORI",new Pizza("ORI", "L'orientale", 13.50));
+		pizzas.put("IND",new Pizza("IND", "L'indienne", 14.00));
 	}
 
 	@Override
-	public Pizza[] findAllPizzas() {
-		Pizza[] resultat = new Pizza[100];
-		System.arraycopy(pizzas, 0, resultat, 0, resultat.length);
-		return resultat;
+	public List<Pizza> findAllPizzas() {
+		
+		//List<Pizza> resultat = new Pizza[100];
+		//System.arraycopy(pizzas, 0, resultat, 0, resultat.length);
+		return new ArrayList<Pizza>(pizzas.values());
 	}
 
 	@Override
 	public void savePizza(Pizza newPizza) throws SavePizzaExeption {
-		boolean placeTrouve = false;
+		pizzas.put(newPizza.code,newPizza);
+		/*boolean placeTrouve = false;
 		int index = 0;
 		while (!placeTrouve && index < pizzas.length) {
 			placeTrouve = pizzas[index] == null;
@@ -42,7 +51,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 			pizzas[index] = newPizza;
 		}else {
 			throw new SavePizzaExeption("erreur de création");
-		}
+		}*/
 	}
 
 	@Override
@@ -65,6 +74,11 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public void deletePizza(String codePizza)throws DeletePizzaException {
+		
+		if(pizzas.containsKey(codePizza)){
+			pizzas.remove(codePizza);
+		}
+		/*
 		boolean pizzaTrouve = false;
 		int index = 0;
 		while (!pizzaTrouve && index < pizzas.length) {
@@ -81,6 +95,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 		}else {
 			throw new DeletePizzaException("erreur de suppresion");
 		}
+		*/
 	}
 
 }
