@@ -12,4 +12,9 @@ public enum TypePizza {
 	public String toString() {
 		return libelle;
 	}
+
+	public String getLibelle() {
+		return libelle;
+	}
+	
 }

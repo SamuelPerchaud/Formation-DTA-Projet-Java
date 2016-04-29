@@ -11,21 +11,22 @@ import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaExeption;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
+import fr.pizzeria.model.TypePizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
 
 	private Map<String, Pizza> pizzas = new HashMap<String, Pizza>();
 
 	public PizzaDaoImpl() {
-		pizzas.put("MAR", new Pizza("PEP", "pepe", 12,1 ))
+		pizzas.put("MAR", new Pizza("PEP", "pepe", 12,TypePizza.VIANDE ));
 		//pizzas.put("PEP", new Pizza("PEP", "Pépéroni", 12.50,));
-		pizzas.put("MAR", new Pizza("MAR", "Margherita", 14.00));
-		pizzas.put("REI", new Pizza("REI", "La Reine", 11.50));
-		pizzas.put("FRO", new Pizza("FRO", "La 4 fromages", 12.00));
-		pizzas.put("CAN", new Pizza("CAN", "La cannibale", 12.50));
-		pizzas.put("SAV", new Pizza("SAV", "La savoyarde", 13.00));
-		pizzas.put("ORI", new Pizza("ORI", "L'orientale", 13.50));
-		pizzas.put("IND", new Pizza("IND", "L'indienne", 14.00));
+		pizzas.put("MAR", new Pizza("MAR", "Margherita", 14.00,TypePizza.VIANDE));
+		pizzas.put("REI", new Pizza("REI", "La Reine", 11.50,TypePizza.VIANDE));
+		pizzas.put("FRO", new Pizza("FRO", "La 4 fromages", 12.00,TypePizza.VIANDE));
+		pizzas.put("CAN", new Pizza("CAN", "La cannibale", 12.50,TypePizza.SANS_VIANDE));
+		pizzas.put("SAV", new Pizza("SAV", "La savoyarde", 13.00,TypePizza.VIANDE));
+		pizzas.put("ORI", new Pizza("ORI", "L'orientale", 13.50,TypePizza.POISSON));
+		pizzas.put("IND", new Pizza("IND", "L'indienne", 14.00,TypePizza.VIANDE));
 	}
 
 	@Override

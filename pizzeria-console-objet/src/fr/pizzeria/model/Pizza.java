@@ -21,4 +21,16 @@ public class Pizza {
 	public double prix;
 	public static int nbPizzas;
 	public TypePizza type;
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Pizza [code=" + code + ", nom=" + nom + ", prix=" + prix + ", type=" + type + "]";
+	}
+	
+	
+	
+	
+	
 }
