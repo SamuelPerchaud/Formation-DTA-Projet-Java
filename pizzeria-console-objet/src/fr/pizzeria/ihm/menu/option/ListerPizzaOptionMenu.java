@@ -21,7 +21,7 @@ public class ListerPizzaOptionMenu extends AbstractOptionMenu {
 
 		for (Pizza p : pizzas) {
 			if (p != null) {
-				System.out.println(p.code + " -> " + p.nom + " (" + p.prix + ")"+" "+p.type);
+				System.out.println(p);
 			}
 		}
 		/*

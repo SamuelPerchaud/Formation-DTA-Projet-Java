@@ -38,6 +38,7 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 		//System.out.println("2 : poisson");
 		//System.out.println("3 : sans viande");
 		newPizza.type = newType[saisieType];
+		
 		//newPizza.type= 
 		boolean resultat = true;
 

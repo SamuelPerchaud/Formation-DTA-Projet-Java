@@ -10,11 +10,11 @@ public class PizzaAdminApp {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		try(Scanner sc = new Scanner(System.in)){
 		IPizzaDao dao = new PizzaDaoImpl();
-		Scanner sc = new Scanner(System.in);
 		Menu menu = new Menu(sc,dao);
 		menu.afficher();
-		
+		}
 	}
 
 }
