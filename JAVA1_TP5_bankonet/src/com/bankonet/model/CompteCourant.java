@@ -1,5 +1,7 @@
 package com.bankonet.model;
 
+import com.bankonet.DebitException;
+
 /**
  * @author fguibert
  */
@@ -38,7 +40,7 @@ public final class CompteCourant extends Compte {
     
     
     @Override
-    public void debiter(float montant) {
+    public void debiter(float montant) throws DebitException {
     	try {
 			if (debitAutorise(montant)) {
 				super.debiter(montant);

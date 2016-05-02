@@ -3,13 +3,14 @@ package com.bankonet.test;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.bankonet.DebitException;
 import com.bankonet.model.BankonetException;
 import com.bankonet.model.CompteCourant;
 
 
 public class TestDebitCompte {
 
-	 public static void main(String[] args) {
+	 public static void main(String[] args) throws DebitException {
 		 
 		 CompteCourant c1 = new CompteCourant(4, "compte courant 1", 0, 1000);
 		 try {

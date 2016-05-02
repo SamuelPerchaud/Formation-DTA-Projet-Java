@@ -12,7 +12,7 @@ import com.bankonet.model.CompteEpargne;
 
 public class TestClient {
 
-	 public static void main(String[] args) {
+	 public static void main(String[] args) throws BankonetException {
 		 
 		
 		// Utilisation d'une collection : création de la liste des comptes courants/epargne
@@ -50,7 +50,12 @@ public class TestClient {
 			    
 		 }
 		 
-		 
+		 try {
+			listClient.get(0).getCompte(0).effectuerVirement(listClient.get(1).getCompte(0), 10000000);
+		} catch (BankonetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		 
 		 
 		
