@@ -3,7 +3,6 @@ package fr.pizzeria.ihm.menu.option;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale.Category;
 import java.util.stream.Collectors;
 
 import fr.pizzeria.dao.IPizzaDao;

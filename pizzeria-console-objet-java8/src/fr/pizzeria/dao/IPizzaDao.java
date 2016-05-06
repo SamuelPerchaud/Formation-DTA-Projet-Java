@@ -8,7 +8,7 @@ import fr.pizzeria.model.Pizza;
 
 public interface IPizzaDao {
 	
-	List<Pizza> findAllPizzas();
+	List<Pizza> findAllPizzas() throws DaoException;
 	void savePizza(Pizza newPizza) throws DaoException;
 	void updatePizza(String codePizza, Pizza updatePizza) throws DaoException;
 	void deletePizza(String codePizza) throws DaoException;

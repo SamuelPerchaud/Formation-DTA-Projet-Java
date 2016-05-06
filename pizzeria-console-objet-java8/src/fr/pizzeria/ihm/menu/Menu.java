@@ -14,6 +14,7 @@ import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.MettreAJourPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.QuitterOptionMenu;
 import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
+import fr.pizzeria.ihm.menu.option.TrouverPizzaMaxOptionMenu;
 import fr.pizzeria.model.DesactiverOptionMenu;
 import fr.pizzeria.model.Pizza;
 
@@ -35,6 +36,7 @@ public class Menu {
 		options.put(2, new AjouterNouvellePizzaOptionMenu(scanner, pizzaDao));
 		options.put(3, new MettreAJourPizzaOptionMenu(scanner, pizzaDao));
 		options.put(4, new SupprimerPizzaOptionMenu(scanner, pizzaDao));
+		options.put(6, new TrouverPizzaMaxOptionMenu(pizzaDao));
 		options.put(99, new QuitterOptionMenu());
 	}
 
