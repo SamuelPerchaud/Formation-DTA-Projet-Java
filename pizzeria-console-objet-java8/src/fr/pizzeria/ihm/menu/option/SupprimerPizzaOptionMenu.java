@@ -14,7 +14,7 @@ public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 	}
 
 	@Override
-	public boolean execute() {
+	public boolean execute() throws DaoException {
 
 		new ListerPizzaOptionMenu(pizzaDao).execute();
 

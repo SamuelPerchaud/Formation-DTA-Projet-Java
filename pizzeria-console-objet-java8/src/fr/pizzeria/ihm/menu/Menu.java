@@ -1,12 +1,11 @@
 package fr.pizzeria.ihm.menu;
 
-import java.lang.reflect.Field;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.TreeMap;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.ihm.menu.option.AbstractOptionMenu;
 import fr.pizzeria.ihm.menu.option.AjouterNouvellePizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzaGroupeOptionMenu;
@@ -15,8 +14,6 @@ import fr.pizzeria.ihm.menu.option.MettreAJourPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.QuitterOptionMenu;
 import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.TrouverPizzaMaxOptionMenu;
-import fr.pizzeria.model.DesactiverOptionMenu;
-import fr.pizzeria.model.Pizza;
 
 public class Menu {
 
@@ -40,7 +37,7 @@ public class Menu {
 		options.put(99, new QuitterOptionMenu());
 	}
 
-	public void afficher() {
+	public void afficher() throws DaoException {
 		boolean continuer = true;
 		while (continuer) {
 			System.out.println("**** " + MENU_TITRE_LIBELLE + " ****");

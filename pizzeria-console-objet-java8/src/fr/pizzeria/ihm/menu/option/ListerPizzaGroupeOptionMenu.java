@@ -1,12 +1,10 @@
 package fr.pizzeria.ihm.menu.option;
 
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.model.DesactiverOptionMenu;
+import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
 
 public class ListerPizzaGroupeOptionMenu extends AbstractOptionMenu {
@@ -20,7 +18,7 @@ public class ListerPizzaGroupeOptionMenu extends AbstractOptionMenu {
 	}
 
 	@Override
-	public boolean execute() {
+	public boolean execute() throws DaoException {
 		
 		
 		

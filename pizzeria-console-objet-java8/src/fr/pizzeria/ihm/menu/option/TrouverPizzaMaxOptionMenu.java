@@ -1,13 +1,9 @@
 package fr.pizzeria.ihm.menu.option;
 
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.model.DesactiverOptionMenu;
+import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
 
 public class TrouverPizzaMaxOptionMenu extends AbstractOptionMenu {
@@ -21,7 +17,7 @@ public class TrouverPizzaMaxOptionMenu extends AbstractOptionMenu {
 	}
 
 	@Override
-	public boolean execute() {
+	public boolean execute() throws DaoException {
 		
 		
 		Optional<Pizza> test =  pizzaDao.findAllPizzas().stream()

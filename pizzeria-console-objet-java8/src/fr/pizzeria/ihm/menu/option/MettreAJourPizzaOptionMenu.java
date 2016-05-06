@@ -6,7 +6,6 @@ import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
-import fr.pizzeria.model.DesactiverOptionMenu;
 import fr.pizzeria.model.Pizza;
 
 public class MettreAJourPizzaOptionMenu extends AbstractOptionMenu {
@@ -18,7 +17,7 @@ public class MettreAJourPizzaOptionMenu extends AbstractOptionMenu {
 	}
 
 	@Override
-	public boolean execute() {
+	public boolean execute() throws DaoException {
 
 		new ListerPizzaOptionMenu(pizzaDao).execute();
 		

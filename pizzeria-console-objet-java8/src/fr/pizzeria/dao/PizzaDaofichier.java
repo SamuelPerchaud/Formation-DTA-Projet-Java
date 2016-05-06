@@ -42,8 +42,10 @@ public class PizzaDaofichier implements IPizzaDao {
 
 	@Override
 	public void savePizza(Pizza newPizza) throws DaoException {
-		// TODO Auto-generated method stub
-		
+			Files.list(repetoire)
+			.map (path -> {
+				
+			})
 	}
 
 	@Override
