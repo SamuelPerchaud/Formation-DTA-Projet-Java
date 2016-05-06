@@ -1,21 +1,27 @@
 package fr.pizzeria.model;
 
 import java.lang.reflect.Field;
+import java.text.Collator;
+import java.util.Arrays;
+//import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Pizza {
 
 	private int id;
-	@ToString private String code;
-	@ToString(uppercase = true) private String nom;
-	@ToString 
+	@ToString
+	private String code;
+	@ToString(uppercase = true)
+	private String nom;
+	@ToString
 	private double prix;
-	@ToString 
+	@ToString
 	private CategoriePizza categorie;
-	
-	
+
 	public static int nbPizzas;
 
 	public Pizza() {
+		this.categorie = CategoriePizza.INDEFINI;
 	}
 
 	public Pizza(String code, String nom, double prix, CategoriePizza cat) {
@@ -52,13 +58,14 @@ public class Pizza {
 
 	/**
 	 * Utiliser plutôt getNouveauPrix()
+	 * 
 	 * @return
 	 */
 	@Deprecated
 	public double getPrix() {
 		return prix;
 	}
-	
+
 	public double getNouveauPrix() {
 		// super algo
 		return prix;
@@ -78,30 +85,35 @@ public class Pizza {
 
 	@Override
 	public String toString() {
-		String value = "";
-		
-		for(Field champ : this.getClass().getDeclaredFields()) {
-			ToString annotation = champ.getAnnotation(ToString.class);
-			
-			if(annotation != null) {
-				try {
-					boolean uppercase = annotation.uppercase();
-					
-					Object valeurDuChamp = champ.get(this);
-					
-					value +=  uppercase ? valeurDuChamp.toString().toUpperCase() : valeurDuChamp + " ";
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return value;
-	}
 
-	
-	
-	
-	
-	
+		return Arrays.asList(this.getClass().getDeclaredFields()).stream()
+				.filter(field -> field.getAnnotation(ToString.class) != null)
+				.map(field -> {
+					try {
+						return field.getAnnotation(ToString.class).uppercase()
+								? field.get(this).toString().toUpperCase() : field.get(this).toString();
+					} catch (SecurityException | IllegalArgumentException | IllegalAccessException e) {
+						e.printStackTrace();
+						return "";
+					}
+				})
+				//.sorted(field -> field.)
+				.collect(Collectors.joining("  "));
+
+		/**
+		 * for(Field champ : this.getClass().getDeclaredFields()) { ToString
+		 * annotation = champ.getAnnotation(ToString.class);
+		 * 
+		 * if(annotation != null) { try { boolean uppercase =
+		 * annotation.uppercase();
+		 * 
+		 * Object valeurDuChamp = champ.get(this);
+		 * 
+		 * value += uppercase ? valeurDuChamp.toString().toUpperCase() :
+		 * valeurDuChamp + " "; } catch (IllegalArgumentException |
+		 * IllegalAccessException e) { e.printStackTrace(); } } }
+		 */
+		// return value;
+	}
 
 }
