@@ -2,7 +2,6 @@ package fr.pizzeria.model;
 
 import java.lang.reflect.Field;
 
-//import java.text.Format.Field;
 
 public class Pizza {
 
