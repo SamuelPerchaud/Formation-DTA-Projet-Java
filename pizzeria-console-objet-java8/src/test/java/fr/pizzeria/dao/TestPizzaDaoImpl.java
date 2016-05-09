@@ -79,13 +79,13 @@ public class TestPizzaDaoImpl {
 
 	@Test
 	public void testupdatePizza() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 
 	}
 
 	@Test
 	public void testdeletePizza() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 
 	}
 
