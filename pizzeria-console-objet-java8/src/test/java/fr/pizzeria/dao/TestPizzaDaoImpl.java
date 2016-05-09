@@ -1,4 +1,4 @@
-package fr.pizza.dao;
+package fr.pizzeria.dao;
 
 import static org.junit.Assert.*;
 
