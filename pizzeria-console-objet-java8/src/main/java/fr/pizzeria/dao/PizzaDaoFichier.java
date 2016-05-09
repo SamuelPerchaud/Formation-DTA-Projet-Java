@@ -11,7 +11,7 @@ import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-public class PizzaDaofichier implements IPizzaDao {
+public class PizzaDaoFichier implements IPizzaDao {
 	private Path repertoire = Paths.get("data");
 
 	@Override
