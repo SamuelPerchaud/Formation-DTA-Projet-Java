@@ -42,10 +42,10 @@ public class PizzaDaofichier implements IPizzaDao {
 
 	@Override
 	public void savePizza(Pizza newPizza) throws DaoException {
-			Files.list(repetoire)
-			.map (path -> {
+			//Files.list(repetoire)
+			//.map (path -> {
 				
-			})
+			//})
 	}
 
 	@Override
