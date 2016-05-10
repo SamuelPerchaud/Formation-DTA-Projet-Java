@@ -3,6 +3,9 @@ package fr.pizzeria.model;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 public class Pizza {
 
 	private int id;
@@ -23,45 +26,32 @@ public class Pizza {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((categorie == null) ? 0 : categorie.hashCode());
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(prix);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
+		// final int prime = 31;
+		// int result = 1;
+		/**
+		 * result = prime * result + ((categorie == null) ? 0 :
+		 * categorie.hashCode()); result = prime * result + ((code == null) ? 0
+		 * : code.hashCode()); result = prime * result + id; result = prime *
+		 * result + ((nom == null) ? 0 : nom.hashCode()); long temp; temp =
+		 * Double.doubleToLongBits(prix); result = prime * result + (int) (temp
+		 * ^ (temp >>> 32)); return result;
+		 */
+		return new HashCodeBuilder(17, 37).append(id).append(code).append(nom).append(prix).toHashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pizza other = (Pizza) obj;
-		if (categorie != other.categorie)
-			return false;
-		if (code == null) {
-			if (other.code != null)
-				return false;
-		} else if (!code.equals(other.code))
-			return false;
-		if (id != other.id)
-			return false;
-		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
-		if (Double.doubleToLongBits(prix) != Double.doubleToLongBits(other.prix))
-			return false;
-		return true;
-	}
+		   if (obj == null) { return false; }
+		   if (obj == this) { return true; }
+		   if (obj.getClass() != getClass()) {
+		     return false;
+		   }
+		   Pizza rhs = (Pizza) obj;
+		   return new EqualsBuilder()
+		                 .appendSuper(super.equals(obj))
+		                 .append(code, rhs.code)
+		                 .isEquals();
+		  }
 
 	public Pizza(String code, String nom, double prix, CategoriePizza cat) {
 		this();
@@ -126,8 +116,7 @@ public class Pizza {
 	public String toString() {
 
 		return Arrays.asList(this.getClass().getDeclaredFields()).stream()
-				.filter(field -> field.getAnnotation(ToString.class) != null)
-				.map(field -> {
+				.filter(field -> field.getAnnotation(ToString.class) != null).map(field -> {
 					try {
 						return field.getAnnotation(ToString.class).uppercase()
 								? field.get(this).toString().toUpperCase() : field.get(this).toString();
@@ -136,7 +125,7 @@ public class Pizza {
 						return "";
 					}
 				})
-				//.sorted(field -> field.)
+				// .sorted(field -> field.)
 				.collect(Collectors.joining("  "));
 
 		/**
