@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>fr.pizzeria</groupId>
+	<artifactId>pizzeria-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>../pizzeria-console-objet-java8</module>
+		<module>../pizzeria-dao</module>
+		<module>../pizzeria-model</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit.version>4.12</junit.version>
+		<version.projet>0.0.1-SNAPSHOT</version.projet>
+	</properties>
+
+
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>pizzeria-console-objet-java8</groupId>
+				<artifactId>pizzeria-console-objet-java8</artifactId>
+				<version>${version.projet}</version>
+			</dependency>
+			<dependency>
+				<groupId>fr.pizzeria</groupId>
+				<artifactId>pizzeria-dao</artifactId>
+				<version>${version.projet}</version>
+			</dependency>
+			<dependency>
+				<groupId>fr.pizzeria</groupId>
+				<artifactId>pizzeria-model</artifactId>
+				<version>${version.projet}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.github.stefanbirkner</groupId>
+				<artifactId>system-rules</artifactId>
+				<version>1.16.0</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.4</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+
+
+
+	<build>
+		<pluginManagement>
+		<plugins>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.9</version>
+			</plugin>
+
+		</plugins>
+	</pluginManagement>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+
+		</plugins>
+
+
+	</build>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</project>
