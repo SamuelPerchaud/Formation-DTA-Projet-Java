@@ -42,7 +42,6 @@ public class Menu {
 		while (continuer) {
 			System.out.println("**** " + MENU_TITRE_LIBELLE + " ****");
 			
-			//Set<Entry<Integer, AbstractOptionMenu>> listeEntries = options.entrySet();
 			options.entrySet().stream()
 			.forEach(optionMenuEntry -> System.out.println(optionMenuEntry.getKey()+" : "+optionMenuEntry.getValue().getLibelle()));
 

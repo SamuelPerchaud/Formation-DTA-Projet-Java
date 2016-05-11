@@ -23,10 +23,7 @@
 				<dao.impl>0</dao.impl>
 			</properties>
 			<activation>
-
 				<activeByDefault>true</activeByDefault>
-
-
 			</activation>
 		</profile>
 
@@ -119,7 +116,6 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
-
 	</dependencies>
 
 </project>

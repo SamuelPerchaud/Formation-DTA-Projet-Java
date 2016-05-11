@@ -16,25 +16,28 @@ public class PizzaAdminConsole {
 	static IPizzaDao daoImpl;
 
 	public static void main(String[] args) throws IOException, DaoException {
-		System.err.println("entre prog");
+		//System.err.println("entre prog");
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
 		Integer dao = Integer.valueOf(confString);
-		System.err.println(dao);
+		//System.err.println(dao);
 		// HashCodeBuilder a = new HashCodeBuilder(12,44);
+		System.err.println("INFO---- Valeur du parametre dao : "+dao+"    (0 = mémoire/1 = fichier)");
+		System.err.println("INFO---- Stockage sur fichier en cours de developpement");
+
 		try (Scanner sc = new Scanner(System.in)) {
 			switch (dao) {
 			case (0):
-				System.err.println("test 1");
+				System.err.println("INFO---- Stockage des données en mémoire");
 				daoImpl = new PizzaDaoImpl();
 				break;
 			case (1):
-				System.err.println("test 2");
+				System.err.println("INFO---- Stockage des données dans les fichiers");
 
 				daoImpl = new PizzaDaoFichier();
 				break;
 			default:
-				System.err.println("aucun parametre de config");
+				System.err.println("INFO---- Aucun parametre de config");
 
 
 			}

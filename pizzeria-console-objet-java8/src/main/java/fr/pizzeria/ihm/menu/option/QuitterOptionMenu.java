@@ -10,7 +10,8 @@ public class QuitterOptionMenu extends AbstractOptionMenu {
 
 	@Override
 	public boolean execute() {
-		System.out.println("Aurevoir :-(");
+		System.out.println("Au revoir :-(");
+		System.err.println("SKYNET IS AWAKENING");
 		return false;
 	}
 
