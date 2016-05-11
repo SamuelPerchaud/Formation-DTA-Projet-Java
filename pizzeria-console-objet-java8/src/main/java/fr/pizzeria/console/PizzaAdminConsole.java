@@ -17,7 +17,7 @@ public class PizzaAdminConsole {
 
 	public static void main(String[] args) throws IOException, DaoException {
 		System.err.println("INFO---- test toujours en cours");
-
+zgt
 		//System.err.println("entre prog");
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
