@@ -16,7 +16,6 @@ public class PizzaAdminConsole {
 	static IPizzaDao daoImpl;
 
 	public static void main(String[] args) throws IOException, DaoException {
-		qsdkpgmljhùoqd^fhgôqdùhi
 		//System.err.println("entre prog");
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
