@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.sql.SQLException;
 import java.util.Comparator;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.DaoException;
@@ -16,7 +17,7 @@ public class ListerPizzaOptionMenu extends AbstractOptionMenu {
 	}
 
 	@Override
-	public boolean execute() throws DaoException {
+	public boolean execute() throws DaoException, SQLException {
 		
 		
 		pizzaDao.findAllPizzas().stream()

@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
@@ -25,7 +26,7 @@ public abstract class AbstractOptionMenu {
 		this.sc = sc;
 	}
 
-	public abstract boolean execute() throws DaoException;
+	public abstract boolean execute() throws DaoException, SQLException;
 
 	public String getLibelle() {
 		return libelle;

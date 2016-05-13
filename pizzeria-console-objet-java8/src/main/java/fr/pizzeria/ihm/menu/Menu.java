@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu;
 
+import java.sql.SQLException;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -37,7 +38,7 @@ public class Menu {
 		options.put(99, new QuitterOptionMenu());
 	}
 
-	public void afficher() throws DaoException {
+	public void afficher() throws DaoException, SQLException {
 		boolean continuer = true;
 		while (continuer) {
 			System.out.println("**** " + MENU_TITRE_LIBELLE + " ****");
