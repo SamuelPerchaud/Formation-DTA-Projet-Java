@@ -15,7 +15,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.12</junit.version>
-		<version.projet>0.0.1-SNAPSHOT</version.projet>
 	</properties>
 
 
@@ -26,17 +25,17 @@
 			<dependency>
 				<groupId>pizzeria-console-objet-java8</groupId>
 				<artifactId>pizzeria-console-objet-java8</artifactId>
-				<version>${version.projet}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>fr.pizzeria</groupId>
 				<artifactId>pizzeria-dao</artifactId>
-				<version>${version.projet}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>fr.pizzeria</groupId>
 				<artifactId>pizzeria-model</artifactId>
-				<version>${version.projet}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
