@@ -81,8 +81,25 @@ public class PizzaDaoDB implements IPizzaDao {
 	}
 
 	@Override
-	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
-		// TODO Auto-generated method stub
+	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException, SQLException {
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzeria", "root", "");
+				Statement statement = connection.createStatement();){
+				// ResultSet resultats = statement.executeQuery("INSERT INTO `pizza`
+				// (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES
+				// (NULL,'"+newPizza.getId()+"','"+newPizza.getNom()+"','"+newPizza.getNouveauPrix()+"','"+newPizza.getCategorie().toString()+"'");
+
+				int nbpizzas = statement.executeUpdate(String.format(
+						"UPDATE `pizza`SET CODE='%s',NOM='%s',PRIX='%s',CATEGORIE='%s' WHERE CODE = '%s'",updatePizza.getCode(),updatePizza.getNom(),updatePizza.getNouveauPrix(),updatePizza.getCategorie().toString(),codePizza));
+						//newPizza.getCode(), newPizza.getNom(), newPizza.getNouveauPrix(), newPizza.getCategorie().toString()));
+
+				System.out.println(nbpizzas + " pizza mise a jour");
+
+				
+				}catch (SQLException e){
+					throw new SQLException(e);
+				}
+				//DELETE FROM `pizza` WHERE `pizza`.`ID` = 4
+				
 
 	}
 
