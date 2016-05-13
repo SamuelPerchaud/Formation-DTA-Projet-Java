@@ -88,8 +88,8 @@ public class PizzaDaoDB implements IPizzaDao {
 
 	@Override
 	public void deletePizza(String codePizza) throws DaoException, SQLException {
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzeria", "root", "");
-		Statement statement = connection.createStatement();
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzeria", "root", "");
+		Statement statement = connection.createStatement();){
 		// ResultSet resultats = statement.executeQuery("INSERT INTO `pizza`
 		// (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES
 		// (NULL,'"+newPizza.getId()+"','"+newPizza.getNom()+"','"+newPizza.getNouveauPrix()+"','"+newPizza.getCategorie().toString()+"'");
@@ -101,7 +101,9 @@ public class PizzaDaoDB implements IPizzaDao {
 		System.out.println(nbpizzas + " pizza supprimé");
 
 		
-		
+		}catch (SQLException e){
+			throw new SQLException(e);
+		}
 		//DELETE FROM `pizza` WHERE `pizza`.`ID` = 4
 		
 	}
