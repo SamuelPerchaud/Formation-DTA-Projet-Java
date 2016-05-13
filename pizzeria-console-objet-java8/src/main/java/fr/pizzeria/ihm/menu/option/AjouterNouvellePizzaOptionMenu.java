@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -19,7 +20,7 @@ public class AjouterNouvellePizzaOptionMenu extends AbstractOptionMenu {
 	}
 
 	@Override
-	public boolean execute() {
+	public boolean execute() throws SQLException {
 
 		Pizza newPizza = new Pizza();
 		System.out.println("Veuillez saisir le code");

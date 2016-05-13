@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>fr.pizzeria</groupId>
 			<artifactId>pizzeria-model</artifactId>
-			</dependency>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -41,7 +41,16 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			</dependency>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.38</version>
+			<scope>runtime</scope>
+
+		</dependency>
+
+
 	</dependencies>
 
 	<parent>

@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
@@ -9,7 +10,7 @@ import fr.pizzeria.model.Pizza;
 
 public class ListerPizzaGroupeOptionMenu extends AbstractOptionMenu {
 
-	private static final String LISTER_PIZZAS_LIBELLE_MENU = "Lister Pizzas groupé";
+	private static final String LISTER_PIZZAS_LIBELLE_MENU = "Lister Pizzas groupï¿½";
 
 	
 	
@@ -18,7 +19,7 @@ public class ListerPizzaGroupeOptionMenu extends AbstractOptionMenu {
 	}
 
 	@Override
-	public boolean execute() throws DaoException {
+	public boolean execute() throws DaoException, SQLException {
 		
 		
 		

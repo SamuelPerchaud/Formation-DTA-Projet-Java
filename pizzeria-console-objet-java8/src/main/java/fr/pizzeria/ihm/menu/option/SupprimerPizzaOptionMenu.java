@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
@@ -14,7 +15,7 @@ public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 	}
 
 	@Override
-	public boolean execute() throws DaoException {
+	public boolean execute() throws DaoException, SQLException {
 
 		new ListerPizzaOptionMenu(pizzaDao).execute();
 
