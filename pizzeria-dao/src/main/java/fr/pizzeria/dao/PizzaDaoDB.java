@@ -11,24 +11,71 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import org.apache.commons.collections4.ListUtils;
+//import java.lang.Object;
+import org.apache.commons.*;
+import org.apache.commons.collections4.bag.CollectionBag;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoDB implements IPizzaDao {
-	private Path repertoire = Paths.get("data");
-
+	private static final String REPERTOIRE_DATA = "data";
+	/**public static <T> List<List<T>> partition(List<T> list,
+            int size) {
+		return null;
+	}
+	*/
 	static {
 		// java.sql.DriverManager.registerDriver(jdbc:mysql:/localhost:3306/pizzeria);
 
 	}
+	private static List<Pizza> pizzas = new ArrayList<Pizza>();
+	private static List<List<Pizza>> test  = new ArrayList<List<Pizza>>();
+	
+	public void importPizza() throws DaoException, SQLException {
+
+		try {
+			pizzas =  Files.list(Paths.get(REPERTOIRE_DATA)).map(path -> {
+				Pizza p = new Pizza();
+				p.setCode(path.getFileName().toString().replaceAll(".txt", ""));
+				try {
+					String ligne = Files.readAllLines(path).get(0);
+					String[] ligneTab = ligne.split(";");
+					p.setNom(ligneTab[0]);
+					p.setPrix(Double.valueOf(ligneTab[1]));
+					p.setCategorie(CategoriePizza.valueOf(ligneTab[2]));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				return p;
+			}).collect(Collectors.toList());
+		} catch (IOException e) {
+			throw new DaoException(e);
+		}
+		test = ListUtils.partition(pizzas,3);
+
+		
+		for (List<Pizza> listPizza : test) {
+			for (Pizza pizza : listPizza) {
+				System.out.println("TEST"+pizza);
+				savePizza(pizza);
+			}
+		}
+		
+		
+	}
 
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException, SQLException {
-
+		//importPizza();
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzeria", "root", "");
 		Statement statement = connection.createStatement();
 		// jdbc:mysql://localhost:3306/pizzeria
@@ -66,14 +113,13 @@ public class PizzaDaoDB implements IPizzaDao {
 	}
 
 	@Override
-	public void savePizza(Pizza newPizza) throws DaoException, SQLException {
+	public  void savePizza(Pizza newPizza) throws DaoException, SQLException {
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzeria", "root", "");
 		connection.setAutoCommit(false);
-		
-		
-		
-		PreparedStatement statement = connection.prepareStatement("INSERT INTO `pizza` (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES (NULL, ?, ?, ?, ?)");
-		statement.setString(1,newPizza.getCode());
+
+		PreparedStatement statement = connection.prepareStatement(
+				"INSERT INTO `pizza` (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES (NULL, ?, ?, ?, ?)");
+		statement.setString(1, newPizza.getCode());
 		statement.setString(2, newPizza.getNom());
 		statement.setDouble(3, newPizza.getNouveauPrix());
 		statement.setString(4, newPizza.getCategorie().toString());
@@ -82,10 +128,11 @@ public class PizzaDaoDB implements IPizzaDao {
 		// (NULL,'"+newPizza.getId()+"','"+newPizza.getNom()+"','"+newPizza.getNouveauPrix()+"','"+newPizza.getCategorie().toString()+"'");
 		int nbpizzas = statement.executeUpdate();
 		/**
-		int nbpizzas = statement.executeUpdate(String.format(
-				"INSERT INTO `pizza` (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES (NULL, '%s', '%s', '%s', '%s')",
-				newPizza.getCode(), newPizza.getNom(), newPizza.getNouveauPrix(), newPizza.getCategorie().toString()));
-				*/
+		 * int nbpizzas = statement.executeUpdate(String.format( "INSERT INTO
+		 * `pizza` (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES (NULL,
+		 * '%s', '%s', '%s', '%s')", newPizza.getCode(), newPizza.getNom(),
+		 * newPizza.getNouveauPrix(), newPizza.getCategorie().toString()));
+		 */
 		if (nbpizzas == 1) {
 			connection.commit();
 			System.out.println(nbpizzas + " pizza inséré");

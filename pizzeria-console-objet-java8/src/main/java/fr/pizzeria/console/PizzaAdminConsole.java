@@ -18,7 +18,7 @@ public class PizzaAdminConsole {
 	static IPizzaDao daoImpl;
 
 	public static void main(String[] args) throws IOException, DaoException, ClassNotFoundException, SQLException {
-		System.err.println("INFO---- test toujours en cours");
+		//System.err.println("INFO---- test toujours en cours");
 
 		// System.err.println("entre prog");
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
@@ -26,7 +26,7 @@ public class PizzaAdminConsole {
 		Integer dao = Integer.valueOf(confString);
 		// System.err.println(dao);
 		// HashCodeBuilder a = new HashCodeBuilder(12,44);
-		System.err.println("INFO---- Valeur du parametre dao : " + dao + "    (0 = mémoire/1 = fichier)");
+		System.err.println("INFO---- Valeur du parametre dao : " + dao);
 		System.err.println("INFO---- Stockage sur fichier en cours de developpement");
 
 		try (Scanner sc = new Scanner(System.in)) {
@@ -46,6 +46,7 @@ public class PizzaAdminConsole {
 			Class.forName("com.mysql.jdbc.Driver");
 				daoImpl = new PizzaDaoDB();
 				break;
+				
 
 			default:
 				System.err.println("INFO---- Aucun parametre de config");

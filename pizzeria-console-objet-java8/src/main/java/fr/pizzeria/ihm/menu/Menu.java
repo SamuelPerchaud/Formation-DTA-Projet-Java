@@ -8,6 +8,7 @@ import java.util.TreeMap;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.ihm.menu.option.AbstractOptionMenu;
+import fr.pizzeria.ihm.menu.option.AjoutMassifOptionMenu;
 import fr.pizzeria.ihm.menu.option.AjouterNouvellePizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzaGroupeOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
@@ -35,6 +36,7 @@ public class Menu {
 		options.put(3, new MettreAJourPizzaOptionMenu(scanner, pizzaDao));
 		options.put(4, new SupprimerPizzaOptionMenu(scanner, pizzaDao));
 		options.put(6, new TrouverPizzaMaxOptionMenu(pizzaDao));
+		options.put(7, new AjoutMassifOptionMenu(pizzaDao));
 		options.put(99, new QuitterOptionMenu());
 	}
 

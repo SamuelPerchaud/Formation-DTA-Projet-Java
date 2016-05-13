@@ -1,5 +1,6 @@
 package fr.pizzeria.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +58,12 @@ public class PizzaDaoImpl implements IPizzaDao {
 			throw new DeletePizzaException("code pizza non trouvé");
 		}
 		pizzas.remove(codePizza);
+	}
+
+	@Override
+	public void importPizza() throws DaoException, SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
