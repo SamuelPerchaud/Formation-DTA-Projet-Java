@@ -12,6 +12,8 @@ import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.ihm.menu.Menu;
 
+
+//test modif
 public class PizzaAdminConsole {
 
 	// static boolean dao_impl;
