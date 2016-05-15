@@ -6,7 +6,7 @@ import java.util.List;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
-
+//test
 public interface IPizzaDao {
 	
 	List<Pizza> findAllPizzas() throws DaoException, SQLException;
