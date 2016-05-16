@@ -6,12 +6,15 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoDB;
 import fr.pizzeria.dao.PizzaDaoFichier;
+import fr.pizzeria.dao.PizzaDaoDB;
+
 import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.ihm.menu.Menu;
 
+
+//test modif
 public class PizzaAdminConsole {
 
 	// static boolean dao_impl;
@@ -19,6 +22,7 @@ public class PizzaAdminConsole {
 
 	public static void main(String[] args) throws IOException, DaoException, ClassNotFoundException, SQLException {
 		//System.err.println("INFO---- test toujours en cours");
+		System.err.println("INFO---- test toujours en cours");
 
 		// System.err.println("entre prog");
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
