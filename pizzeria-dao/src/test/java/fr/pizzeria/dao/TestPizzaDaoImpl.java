@@ -2,6 +2,7 @@ package fr.pizzeria.dao;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -29,15 +30,15 @@ public class TestPizzaDaoImpl {
 		 pizzaDao = new PizzaDaoImpl();
 		 pizzasTest = new ArrayList<Pizza>();
 		 
-		pizzasTest.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
-		pizzasTest.add( new Pizza("MAR", "Margherita", 14.00, CategoriePizza.SANS_VIANDE));
-		pizzasTest.add( new Pizza("REI", "La Reine", 11.50, CategoriePizza.VIANDE));
-		pizzasTest.add( new Pizza("FRO", "La 4 fromages", 12.00, CategoriePizza.SANS_VIANDE));
-		pizzasTest.add( new Pizza("CAN", "La cannibale", 12.50, CategoriePizza.VIANDE));
-		pizzasTest.add( new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.VIANDE));
-		pizzasTest.add( new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VIANDE));
-		pizzasTest.add( new Pizza("IND", "L'indienne", 14.00, CategoriePizza.VIANDE));
-		pizzasTest.add( new Pizza("SAU", "La Saumonéta", 14.00, CategoriePizza.POISSON));
+		pizzasTest.add(new Pizza("PEP", "Pépéroni", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
+		pizzasTest.add( new Pizza("MAR", "Margherita", BigDecimal.valueOf(12.50), CategoriePizza.SANS_VIANDE));
+		pizzasTest.add( new Pizza("REI", "La Reine", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
+		pizzasTest.add( new Pizza("FRO", "La 4 fromages",BigDecimal.valueOf(12.50), CategoriePizza.SANS_VIANDE));
+		pizzasTest.add( new Pizza("CAN", "La cannibale", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
+		pizzasTest.add( new Pizza("SAV", "La savoyarde", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
+		pizzasTest.add( new Pizza("ORI", "L'orientale", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
+		pizzasTest.add( new Pizza("IND", "L'indienne", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
+		pizzasTest.add( new Pizza("SAU", "La Saumonéta", BigDecimal.valueOf(12.50), CategoriePizza.POISSON));
 		pizzasTest.sort(Comparator.comparing(Pizza::getCode));
 
 	}
@@ -69,7 +70,7 @@ public class TestPizzaDaoImpl {
 	//SavePizzaException
 	@Test(expected = SavePizzaException.class)
 	public void testPizzasavePizza_codeExistant() throws DaoException {
-		Pizza newPizza =  new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE);
+		Pizza newPizza =  new Pizza("PEP", "Pépéroni", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE);
 		pizzaDao.savePizza(newPizza);
 		
 		

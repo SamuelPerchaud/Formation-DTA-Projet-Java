@@ -1,5 +1,6 @@
 package fr.pizzeria.dao;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,15 +20,15 @@ public class PizzaDaoImpl implements IPizzaDao {
 	private Map<String, Pizza> pizzas = new HashMap<String, Pizza>();
 
 	public PizzaDaoImpl() {
-		pizzas.put("PEP", new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
-		pizzas.put("MAR", new Pizza("MAR", "Margherita", 14.00,  CategoriePizza.SANS_VIANDE));
-		pizzas.put("REI", new Pizza("REI", "La Reine", 11.50, CategoriePizza.VIANDE));
-		pizzas.put("FRO", new Pizza("FRO", "La 4 fromages", 12.00,  CategoriePizza.SANS_VIANDE));
-		pizzas.put("CAN", new Pizza("CAN", "La cannibale", 12.50, CategoriePizza.VIANDE));
-		pizzas.put("SAV", new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.VIANDE));
-		pizzas.put("ORI", new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VIANDE));
-		pizzas.put("IND", new Pizza("IND", "L'indienne", 14.00, CategoriePizza.VIANDE));
-		pizzas.put("SAU", new Pizza("SAU", "La Saumonéta", 14.00, CategoriePizza.POISSON));
+		pizzas.put("PEP", new Pizza("PEP", "Pépéroni", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
+		pizzas.put("MAR", new Pizza("MAR", "Margherita", BigDecimal.valueOf(1140),  CategoriePizza.SANS_VIANDE));
+		pizzas.put("REI", new Pizza("REI", "La Reine", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
+		pizzas.put("FRO", new Pizza("FRO", "La 4 fromages", BigDecimal.valueOf(12.50),  CategoriePizza.SANS_VIANDE));
+		pizzas.put("CAN", new Pizza("CAN", "La cannibale", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
+		pizzas.put("SAV", new Pizza("SAV", "La savoyarde", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
+		pizzas.put("ORI", new Pizza("ORI", "L'orientale",BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
+		pizzas.put("IND", new Pizza("IND", "L'indienne", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
+		pizzas.put("SAU", new Pizza("SAU", "La Saumonéta", BigDecimal.valueOf(12.50), CategoriePizza.POISSON));
 	}
 	
 	@Override

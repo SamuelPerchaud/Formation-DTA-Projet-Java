@@ -1,5 +1,6 @@
 package fr.pizzeria.model;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -23,13 +24,13 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @NamedQuery(name="pizza.getcode",query="SELECT p FROM Pizza p WHERE p.code=:code")
 public class Pizza {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	@ToString
 	private String code;
 	@ToString(uppercase = true)
 	private String nom;
 	@ToString
-	private double prix;
+	private BigDecimal prix;
 	@ToString @Enumerated (EnumType.STRING)
 	private CategoriePizza categorie;
 
@@ -69,7 +70,7 @@ public class Pizza {
 		return new EqualsBuilder().appendSuper(super.equals(obj)).append(code, rhs.code).isEquals();
 	}
 
-	public Pizza(String code, String nom, double prix, CategoriePizza cat) {
+	public Pizza(String code, String nom, BigDecimal prix, CategoriePizza cat) {
 		this();
 		this.code = code;
 		this.nom = nom;
@@ -77,11 +78,11 @@ public class Pizza {
 		this.categorie = cat;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -107,16 +108,16 @@ public class Pizza {
 	 * @return
 	 */
 	@Deprecated
-	public double getPrix() {
+	public BigDecimal getPrix() {
 		return prix;
 	}
 
-	public double getNouveauPrix() {
+	public BigDecimal getNouveauPrix() {
 		// super algo
 		return prix;
 	}
 
-	public void setPrix(double prix) {
+	public void setPrix(BigDecimal prix) {
 		this.prix = prix;
 	}
 

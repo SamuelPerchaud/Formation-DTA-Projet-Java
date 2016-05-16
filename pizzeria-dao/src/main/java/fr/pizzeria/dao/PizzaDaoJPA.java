@@ -1,6 +1,7 @@
 package fr.pizzeria.dao;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -101,10 +102,10 @@ public class PizzaDaoJPA implements IPizzaDao {
 
 		} catch (NoResultException e) {
 			em.persist(newPizza);
-			System.err.println(newPizza);
+			//System.err.println(newPizza);
 			et.commit();
 			em.close();
-			System.err.println(" pizza inséré  : " + newPizza);
+			System.err.println("INFO---- pizza inséré  : " + newPizza);
 			// EntityNotFoundException e
 		}
 
@@ -131,7 +132,7 @@ public class PizzaDaoJPA implements IPizzaDao {
 			pizza.setCategorie(updatePizza.getCategorie());
 		}
 
-		em.merge(pizza);
+		//em.merge(pizza);
 		System.err.println("la pizza : " + pizza + "a été mise a jour");
 		et.commit();
 		em.close();
@@ -146,7 +147,7 @@ public class PizzaDaoJPA implements IPizzaDao {
 		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code", codePizza)
 				.getSingleResult();
 		em.remove(pizza);
-		System.err.println(pizza);
+		System.err.println("la pizza : " + pizza + "a été supprimé");
 		et.commit();
 		em.close();
 
@@ -179,11 +180,12 @@ public class PizzaDaoJPA implements IPizzaDao {
 					String ligne = Files.readAllLines(path).get(0);
 					String[] ligneTab = ligne.split(";");
 					p.setNom(ligneTab[0]);
-					p.setPrix(Double.valueOf(ligneTab[1]));
+					p.setPrix(new BigDecimal(ligneTab[1]));
 					p.setCategorie(CategoriePizza.valueOf(ligneTab[2]));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				System.err.println("INFO----IMPORT de " + p);
 
 				return p;
 			}).collect(Collectors.toList());
@@ -194,7 +196,7 @@ public class PizzaDaoJPA implements IPizzaDao {
 
 		for (List<Pizza> listPizza : test) {
 			for (Pizza pizza : listPizza) {
-				System.out.println("TEST" + pizza);
+				//System.err.println("INFO----IMPORT de " + pizza);
 				savePizza(pizza);
 			}
 		}
