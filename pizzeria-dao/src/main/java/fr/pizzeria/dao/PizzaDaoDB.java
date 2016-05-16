@@ -1,6 +1,7 @@
 package fr.pizzeria.dao;
 
-
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -11,6 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.apache.commons.collections4.ListUtils;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.CategoriePizza;
@@ -23,6 +26,9 @@ public class PizzaDaoDB implements IPizzaDao {
 		// java.sql.DriverManager.registerDriver(jdbc:mysql:/localhost:3306/pizzeria);
 
 	}
+	private static final String REPERTOIRE_DATA = "data";
+	private static List<Pizza> pizzas = new ArrayList<Pizza>();
+	private static List<List<Pizza>> test = new ArrayList<List<Pizza>>();
 
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException, SQLException {
@@ -93,22 +99,45 @@ public class PizzaDaoDB implements IPizzaDao {
 		// (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES
 		// (NULL,'"+newPizza.getId()+"','"+newPizza.getNom()+"','"+newPizza.getNouveauPrix()+"','"+newPizza.getCategorie().toString()+"'");
 
-		int nbpizzas = statement.executeUpdate(String.format(
-				"DELETE FROM `pizza` WHERE CODE = '%s'",codePizza));
-				//newPizza.getCode(), newPizza.getNom(), newPizza.getNouveauPrix(), newPizza.getCategorie().toString()));
+		int nbpizzas = statement.executeUpdate(String.format("DELETE FROM `pizza` WHERE CODE = '%s'", codePizza));
+		// newPizza.getCode(), newPizza.getNom(), newPizza.getNouveauPrix(),
+		// newPizza.getCategorie().toString()));
 
 		System.out.println(nbpizzas + " pizza supprimé");
 
-		
-		
-		//DELETE FROM `pizza` WHERE `pizza`.`ID` = 4
-		
+		// DELETE FROM `pizza` WHERE `pizza`.`ID` = 4
+
 	}
 
 	@Override
 	public void importPizza() throws DaoException, SQLException {
-		// TODO Auto-generated method stub
-		
+		try {
+			pizzas = Files.list(Paths.get(REPERTOIRE_DATA)).map(path -> {
+				Pizza p = new Pizza();
+				p.setCode(path.getFileName().toString().replaceAll(".txt", ""));
+				try {
+					String ligne = Files.readAllLines(path).get(0);
+					String[] ligneTab = ligne.split(";");
+					p.setNom(ligneTab[0]);
+					p.setPrix(Double.valueOf(ligneTab[1]));
+					p.setCategorie(CategoriePizza.valueOf(ligneTab[2]));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				return p;
+			}).collect(Collectors.toList());
+		} catch (IOException e) {
+			throw new DaoException(e);
+		}
+		test = ListUtils.partition(pizzas, 3);
+
+		for (List<Pizza> listPizza : test) {
+			for (Pizza pizza : listPizza) {
+				System.out.println("TEST" + pizza);
+				savePizza(pizza);
+			}
+		}
 	}
 
 }

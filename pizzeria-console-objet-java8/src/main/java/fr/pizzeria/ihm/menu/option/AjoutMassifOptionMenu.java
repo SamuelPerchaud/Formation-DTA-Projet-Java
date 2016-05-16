@@ -11,7 +11,7 @@ import fr.pizzeria.model.Pizza;
 
 public class AjoutMassifOptionMenu  extends AbstractOptionMenu {
 
-	private static final String LISTER_PIZZAS_LIBELLE_MENU = "Lister Pizzas";
+	private static final String LISTER_PIZZAS_LIBELLE_MENU = "ajout MASSIF";
 
 	
 	
@@ -21,7 +21,7 @@ public class AjoutMassifOptionMenu  extends AbstractOptionMenu {
 
 	@Override
 	public boolean execute() throws DaoException, SQLException {
-		//pizzaDao.importPizza();
+		pizzaDao.importPizza();
 		
 		
 		

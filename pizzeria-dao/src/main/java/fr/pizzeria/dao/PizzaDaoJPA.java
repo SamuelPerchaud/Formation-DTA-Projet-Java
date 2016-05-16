@@ -1,5 +1,7 @@
 package fr.pizzeria.dao;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -16,6 +18,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+
+import org.apache.commons.collections4.ListUtils;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.CategoriePizza;
@@ -35,7 +39,9 @@ public class PizzaDaoJPA implements IPizzaDao {
 	}
 	
 	
-	
+	private static final String REPERTOIRE_DATA = "data";
+	private static List<Pizza> pizzas = new ArrayList<Pizza>();
+	private static List<List<Pizza>> test = new ArrayList<List<Pizza>>();
 
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException, SQLException {
@@ -148,8 +154,33 @@ public class PizzaDaoJPA implements IPizzaDao {
 
 	@Override
 	public void importPizza() throws DaoException, SQLException {
-		// TODO Auto-generated method stub
+		try {
+			pizzas = Files.list(Paths.get(REPERTOIRE_DATA)).map(path -> {
+				Pizza p = new Pizza();
+				p.setCode(path.getFileName().toString().replaceAll(".txt", ""));
+				try {
+					String ligne = Files.readAllLines(path).get(0);
+					String[] ligneTab = ligne.split(";");
+					p.setNom(ligneTab[0]);
+					p.setPrix(Double.valueOf(ligneTab[1]));
+					p.setCategorie(CategoriePizza.valueOf(ligneTab[2]));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
+				return p;
+			}).collect(Collectors.toList());
+		} catch (IOException e) {
+			throw new DaoException(e);
+		}
+		test = ListUtils.partition(pizzas, 3);
+
+		for (List<Pizza> listPizza : test) {
+			for (Pizza pizza : listPizza) {
+				System.out.println("TEST" + pizza);
+				savePizza(pizza);
+			}
+		}
 	}
 
 }
