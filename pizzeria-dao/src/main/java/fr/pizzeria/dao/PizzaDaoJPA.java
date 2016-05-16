@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -22,23 +24,25 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoJPA implements IPizzaDao {
 	private Path repertoire = Paths.get("data");
 
-	public EntityManager em;
-
-	
+	public EntityManagerFactory emf;
 
 	/**
-	 * @param em
+	 * @param entityManagerFactory
 	 */
-	public PizzaDaoJPA(EntityManager em) {
+	public PizzaDaoJPA(EntityManagerFactory entityManagerFactory) {
 		super();
-		this.em = em;
+		this.emf = entityManagerFactory;
 	}
+	
+	
+	
 
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException, SQLException {
-		TypedQuery<Pizza> listPizza =  em.createQuery("SELECT p FROM PIZZA",Pizza.class);
-		
-		
+		EntityManager em = emf.createEntityManager();
+		List<Pizza> listPizza = em.createQuery("SELECT p FROM Pizza p", Pizza.class).getResultList();
+		em.close();
+
 		/**
 		 * Connection connection =
 		 * DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzeria",
@@ -73,7 +77,7 @@ public class PizzaDaoJPA implements IPizzaDao {
 		 * return p; }) .collect(Collectors.toList()); } catch (IOException e) {
 		 * throw new DaoException(e); }
 		 */
-		return (List<Pizza>) listPizza;
+		return listPizza;
 	}
 
 	@Override
@@ -94,26 +98,41 @@ public class PizzaDaoJPA implements IPizzaDao {
 
 	@Override
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void deletePizza(String codePizza) throws DaoException, SQLException {
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzeria", "root", "");
-		Statement statement = connection.createStatement();
-		// ResultSet resultats = statement.executeQuery("INSERT INTO `pizza`
-		// (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES
-		// (NULL,'"+newPizza.getId()+"','"+newPizza.getNom()+"','"+newPizza.getNouveauPrix()+"','"+newPizza.getCategorie().toString()+"'");
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code",codePizza).getSingleResult();
 
-		int nbpizzas = statement.executeUpdate(String.format("DELETE FROM `pizza` WHERE CODE = '%s'", codePizza));
-		// newPizza.getCode(), newPizza.getNom(), newPizza.getNouveauPrix(),
-		// newPizza.getCategorie().toString()));
+		//Pizza pizza = listPizza.get(0);
+		em.remove(pizza);
+		System.err.println(pizza);
+		et.commit();
+		em.close();
+		//em.close();
+		// em.flush();
 
-		System.out.println(nbpizzas + " pizza supprimé");
-
-		// DELETE FROM `pizza` WHERE `pizza`.`ID` = 4
-
+		/**
+		 * Connection connection =
+		 * DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzeria",
+		 * "root", ""); Statement statement = connection.createStatement(); //
+		 * ResultSet resultats = statement.executeQuery("INSERT INTO `pizza` //
+		 * (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES //
+		 * (NULL,'"+newPizza.getId()+"','"+newPizza.getNom()+"','"+newPizza.getNouveauPrix()+"','"+newPizza.getCategorie().toString()+"'");
+		 * 
+		 * int nbpizzas = statement.executeUpdate(String.format("DELETE FROM
+		 * `pizza` WHERE CODE = '%s'", codePizza)); // newPizza.getCode(),
+		 * newPizza.getNom(), newPizza.getNouveauPrix(), //
+		 * newPizza.getCategorie().toString()));
+		 * 
+		 * System.out.println(nbpizzas + " pizza supprimé");
+		 * 
+		 * // DELETE FROM `pizza` WHERE `pizza`.`ID` = 4
+		 */
 	}
 
 	@Override

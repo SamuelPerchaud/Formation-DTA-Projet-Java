@@ -4,14 +4,22 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+
+
+
+
+
 @Entity
+@NamedQuery(name="pizza.getcode",query="SELECT p FROM Pizza p WHERE p.code=:code")
 public class Pizza {
 	@Id @GeneratedValue
 	private int id;
@@ -21,7 +29,7 @@ public class Pizza {
 	private String nom;
 	@ToString
 	private double prix;
-	@ToString @Enumerated
+	@ToString @Enumerated (EnumType.STRING)
 	private CategoriePizza categorie;
 
 	public static int nbPizzas;

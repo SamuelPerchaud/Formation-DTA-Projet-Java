@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.logging.Level;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -50,17 +51,18 @@ public class PizzaAdminConsole {
 				daoImpl = new PizzaDaoFichier();
 				break;
 
-			case (0):
+			case (3):
 				System.err.println("INFO---- Stockage des données sur la BDD");
 				Class.forName("com.mysql.jdbc.Driver");
 				daoImpl = new PizzaDaoDB();
 				break;
-			case (3):
+			case (0):
 				System.err.println("INFO---- Stockage des données sur la BDD avec JPA");
 				//Class.forName("com.mysql.jdbc.Driver");
-		    entityManagerFactory = Persistence.createEntityManagerFactory( "org.hibernate.tutorial.jpa" );
+			java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
+		    entityManagerFactory = Persistence.createEntityManagerFactory( "pizzeria-console-objet-java8" );
 
-				daoImpl = new PizzaDaoJPA(entityManagerFactory.createEntityManager());
+				daoImpl = new PizzaDaoJPA(entityManagerFactory);
 				break;
 				
 				
