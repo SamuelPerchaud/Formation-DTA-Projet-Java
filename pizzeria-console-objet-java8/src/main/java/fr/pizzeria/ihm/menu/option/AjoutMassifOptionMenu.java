@@ -21,7 +21,7 @@ public class AjoutMassifOptionMenu  extends AbstractOptionMenu {
 
 	@Override
 	public boolean execute() throws DaoException, SQLException {
-		pizzaDao.importPizza();
+		//pizzaDao.importPizza();
 		
 		
 		

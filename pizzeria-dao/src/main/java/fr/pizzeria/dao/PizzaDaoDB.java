@@ -1,4 +1,10 @@
+package fr.pizzeria.dao;
 
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -96,6 +102,12 @@ public class PizzaDaoDB implements IPizzaDao {
 		
 		
 		//DELETE FROM `pizza` WHERE `pizza`.`ID` = 4
+		
+	}
+
+	@Override
+	public void importPizza() throws DaoException, SQLException {
+		// TODO Auto-generated method stub
 		
 	}
 

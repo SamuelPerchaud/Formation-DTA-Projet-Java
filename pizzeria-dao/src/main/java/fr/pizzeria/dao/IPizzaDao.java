@@ -14,8 +14,6 @@ public interface IPizzaDao {
 	void updatePizza(String codePizza, Pizza updatePizza) throws DaoException, SQLException;
 	void deletePizza(String codePizza) throws DaoException, SQLException;
 	void importPizza() throws DaoException, SQLException;
-	void updatePizza(String codePizza, Pizza updatePizza) throws DaoException;
-	void deletePizza(String codePizza) throws DaoException, SQLException;
->>>>>>> branch 'master' of https://github.com/SamuelPerchaud/formation-dta.git
+
 
 }

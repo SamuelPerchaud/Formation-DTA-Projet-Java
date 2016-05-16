@@ -2,17 +2,21 @@ package fr.pizzeria.console;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoFichier;
 import fr.pizzeria.dao.PizzaDaoDB;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.dao.PizzaDaoJPA;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.ihm.menu.Menu;
-
 
 //test modif
 public class PizzaAdminConsole {
@@ -21,9 +25,9 @@ public class PizzaAdminConsole {
 	static IPizzaDao daoImpl;
 
 	public static void main(String[] args) throws IOException, DaoException, ClassNotFoundException, SQLException {
-		//System.err.println("INFO---- test toujours en cours");
+		// System.err.println("INFO---- test toujours en cours");
 		System.err.println("INFO---- test toujours en cours");
-
+		Locale.setDefault(Locale.FRENCH);
 		// System.err.println("entre prog");
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
@@ -34,6 +38,7 @@ public class PizzaAdminConsole {
 		System.err.println("INFO---- Stockage sur fichier en cours de developpement");
 
 		try (Scanner sc = new Scanner(System.in)) {
+			EntityManagerFactory entityManagerFactory;
 			switch (dao) {
 			case (2):
 				System.err.println("INFO---- Stockage des données en mémoire");
@@ -47,11 +52,18 @@ public class PizzaAdminConsole {
 
 			case (0):
 				System.err.println("INFO---- Stockage des données sur la BDD");
-			Class.forName("com.mysql.jdbc.Driver");
+				Class.forName("com.mysql.jdbc.Driver");
 				daoImpl = new PizzaDaoDB();
 				break;
-				
+			case (3):
+				System.err.println("INFO---- Stockage des données sur la BDD avec JPA");
+				//Class.forName("com.mysql.jdbc.Driver");
+		    entityManagerFactory = Persistence.createEntityManagerFactory( "org.hibernate.tutorial.jpa" );
 
+				daoImpl = new PizzaDaoJPA(entityManagerFactory.createEntityManager());
+				break;
+				
+				
 			default:
 				System.err.println("INFO---- Aucun parametre de config");
 
