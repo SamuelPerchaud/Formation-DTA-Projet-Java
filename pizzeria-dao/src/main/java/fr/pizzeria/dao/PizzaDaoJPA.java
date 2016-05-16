@@ -82,23 +82,38 @@ public class PizzaDaoJPA implements IPizzaDao {
 
 	@Override
 	public void savePizza(Pizza newPizza) throws DaoException, SQLException {
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzeria", "root", "");
-		Statement statement = connection.createStatement();
-		// ResultSet resultats = statement.executeQuery("INSERT INTO `pizza`
-		// (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES
-		// (NULL,'"+newPizza.getId()+"','"+newPizza.getNom()+"','"+newPizza.getNouveauPrix()+"','"+newPizza.getCategorie().toString()+"'");
-
-		int nbpizzas = statement.executeUpdate(String.format(
-				"INSERT INTO `pizza` (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES (NULL, '%s', '%s', '%s', '%s')",
-				newPizza.getCode(), newPizza.getNom(), newPizza.getNouveauPrix(), newPizza.getCategorie().toString()));
-
-		System.out.println(nbpizzas + " pizza inséré");
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		em.persist(newPizza);
+		System.err.println(newPizza);
+		et.commit();
+		em.close();
+		
+		System.err.println(" pizza inséré : "+newPizza);
 
 	}
 
 	@Override
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code",codePizza).getSingleResult();
+		if(pizza != null){
+			pizza.setCode(updatePizza.getCode());
+			pizza.setNom(updatePizza.getNom());
+			pizza.setPrix(updatePizza.getNouveauPrix());
+			pizza.setCategorie(updatePizza.getCategorie());
+		}
+		
+		em.merge(pizza);
+		System.err.println("la pizza : "+pizza+"a été mise a jour");
+		et.commit();
+		em.close();
 
+		
+		
 	}
 
 	@Override
@@ -107,14 +122,10 @@ public class PizzaDaoJPA implements IPizzaDao {
 		EntityTransaction et = em.getTransaction();
 		et.begin();
 		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code",codePizza).getSingleResult();
-
-		//Pizza pizza = listPizza.get(0);
 		em.remove(pizza);
 		System.err.println(pizza);
 		et.commit();
 		em.close();
-		//em.close();
-		// em.flush();
 
 		/**
 		 * Connection connection =

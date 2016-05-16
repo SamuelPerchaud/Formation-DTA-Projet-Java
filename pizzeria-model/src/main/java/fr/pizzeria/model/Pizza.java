@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
@@ -21,7 +22,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @Entity
 @NamedQuery(name="pizza.getcode",query="SELECT p FROM Pizza p WHERE p.code=:code")
 public class Pizza {
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	@ToString
 	private String code;
