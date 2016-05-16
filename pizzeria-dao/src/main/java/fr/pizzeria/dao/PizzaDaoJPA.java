@@ -90,7 +90,7 @@ public class PizzaDaoJPA implements IPizzaDao {
 		et.commit();
 		em.close();
 		
-		System.err.println(" pizza inséré : "+newPizza);
+		System.err.println(" pizza inséré  : "+newPizza);
 
 	}
 
