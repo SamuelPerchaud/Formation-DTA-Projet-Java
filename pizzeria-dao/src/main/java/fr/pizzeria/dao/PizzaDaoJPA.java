@@ -15,7 +15,9 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -37,8 +39,7 @@ public class PizzaDaoJPA implements IPizzaDao {
 		super();
 		this.emf = entityManagerFactory;
 	}
-	
-	
+
 	private static final String REPERTOIRE_DATA = "data";
 	private static List<Pizza> pizzas = new ArrayList<Pizza>();
 	private static List<List<Pizza>> test = new ArrayList<List<Pizza>>();
@@ -91,12 +92,28 @@ public class PizzaDaoJPA implements IPizzaDao {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
-		em.persist(newPizza);
-		System.err.println(newPizza);
-		et.commit();
-		em.close();
-		
-		System.err.println(" pizza inséré  : "+newPizza);
+		Pizza pizza = null;
+		try {
+			pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code", newPizza.getCode())
+					.getSingleResult();
+			System.err.println("INFO---- Pizza deja presente");
+			em.close();
+
+		} catch (NoResultException e) {
+			em.persist(newPizza);
+			System.err.println(newPizza);
+			et.commit();
+			em.close();
+			System.err.println(" pizza inséré  : " + newPizza);
+			// EntityNotFoundException e
+		}
+
+		// em.persist(newPizza);
+		// System.err.println(newPizza);
+		// et.commit();
+		// em.close();
+
+		// System.err.println(" pizza inséré : " + newPizza);
 
 	}
 
@@ -105,21 +122,20 @@ public class PizzaDaoJPA implements IPizzaDao {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
-		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code",codePizza).getSingleResult();
-		if(pizza != null){
+		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code", codePizza)
+				.getSingleResult();
+		if (pizza != null) {
 			pizza.setCode(updatePizza.getCode());
 			pizza.setNom(updatePizza.getNom());
 			pizza.setPrix(updatePizza.getNouveauPrix());
 			pizza.setCategorie(updatePizza.getCategorie());
 		}
-		
+
 		em.merge(pizza);
-		System.err.println("la pizza : "+pizza+"a été mise a jour");
+		System.err.println("la pizza : " + pizza + "a été mise a jour");
 		et.commit();
 		em.close();
 
-		
-		
 	}
 
 	@Override
@@ -127,7 +143,8 @@ public class PizzaDaoJPA implements IPizzaDao {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
-		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code",codePizza).getSingleResult();
+		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code", codePizza)
+				.getSingleResult();
 		em.remove(pizza);
 		System.err.println(pizza);
 		et.commit();

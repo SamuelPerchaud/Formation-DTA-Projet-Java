@@ -54,7 +54,19 @@
 				<artifactId>commons-lang3</artifactId>
 				<version>3.4</version>
 			</dependency>
+			<dependency>
+				<groupId>org.hibernate.javax.persistence</groupId>
+				<artifactId>hibernate-jpa-2.1-api</artifactId>
+				<version>1.0.0.Final</version>
 
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>5.1.0.Final</version>
+				<scope>runtime</scope>
+
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -63,14 +75,14 @@
 
 	<build>
 		<pluginManagement>
-		<plugins>
-			<plugin>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.9</version>
-			</plugin>
+			<plugins>
+				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.9</version>
+				</plugin>
 
-		</plugins>
-	</pluginManagement>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -80,24 +92,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-
-
 		</plugins>
-
-
 	</build>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </project>

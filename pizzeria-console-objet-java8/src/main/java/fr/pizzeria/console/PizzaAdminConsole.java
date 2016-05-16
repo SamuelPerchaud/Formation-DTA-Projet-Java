@@ -60,6 +60,8 @@ public class PizzaAdminConsole {
 				System.err.println("INFO---- Stockage des données sur la BDD avec JPA");
 				//Class.forName("com.mysql.jdbc.Driver");
 			java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
+			java.util.logging.Logger.getLogger("SSL").setLevel(Level.SEVERE);
+			//System.setProperty("jsse.enableSNIExtension", "false");
 		    entityManagerFactory = Persistence.createEntityManagerFactory( "pizzeria-console-objet-java8" );
 
 				daoImpl = new PizzaDaoJPA(entityManagerFactory);
