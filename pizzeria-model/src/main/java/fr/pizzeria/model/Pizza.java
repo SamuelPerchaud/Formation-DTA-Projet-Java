@@ -33,6 +33,19 @@ public class Pizza {
 	private BigDecimal prix;
 	@ToString @Enumerated (EnumType.STRING)
 	private CategoriePizza categorie;
+	
+	//@ManyToMany
+	//private List<Commande> commande;
+	
+	private String urlImage;
+
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
+	}
 
 	public static int nbPizzas;
 

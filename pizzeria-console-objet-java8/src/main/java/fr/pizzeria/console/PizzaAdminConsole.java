@@ -59,8 +59,8 @@ public class PizzaAdminConsole {
 			case (0):
 				System.err.println("INFO---- Stockage des données sur la BDD avec JPA");
 				//Class.forName("com.mysql.jdbc.Driver");
-			java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
-			java.util.logging.Logger.getLogger("SSL").setLevel(Level.SEVERE);
+			java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
+			//java.util.logging.Logger.getLogger("SSL").setLevel(Level.SEVERE);
 			//System.setProperty("jsse.enableSNIExtension", "false");
 		    entityManagerFactory = Persistence.createEntityManagerFactory( "pizzeria-console-objet-java8" );
 
