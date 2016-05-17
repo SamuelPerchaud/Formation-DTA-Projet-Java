@@ -13,6 +13,7 @@ import fr.pizzeria.ihm.menu.Menu;
 public class PizzeriaClientApp {
 
 	
+	//test
 	
 	public static void main(String[] args) {
 		EntityManagerFactory entityManagerFactory;
