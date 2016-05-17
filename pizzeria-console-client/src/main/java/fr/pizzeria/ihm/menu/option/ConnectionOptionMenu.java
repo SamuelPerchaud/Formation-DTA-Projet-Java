@@ -14,7 +14,7 @@ public class ConnectionOptionMenu extends AbstractOptionMenuClient {
 
 	@Override
 	public boolean execute() {
-		System.out.println("");
+		System.out.println("blop");
 
 		return true;
 	}
