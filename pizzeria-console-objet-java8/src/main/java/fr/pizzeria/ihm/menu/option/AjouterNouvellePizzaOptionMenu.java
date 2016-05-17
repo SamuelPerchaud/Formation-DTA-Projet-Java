@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
@@ -30,18 +30,16 @@ public class AjouterNouvellePizzaOptionMenu extends AbstractOptionMenu {
 		System.out.println("Veuillez saisir le prix");
 		try {
 			newPizza.setPrix(sc.nextBigDecimal());
-			
+
 			System.out.println("Veuillez saisir la catégorie");
-			
+
 			CategoriePizza[] categoriePizzas = CategoriePizza.values();
-			for(CategoriePizza cat : categoriePizzas) {
+			for (CategoriePizza cat : categoriePizzas) {
 				System.out.println(cat.ordinal() + " -> " + cat.getLibelle());
 			}
 			int saisieCategorie = sc.nextInt();
 			newPizza.setCategorie(categoriePizzas[saisieCategorie]);
-			
-			
-			
+
 			pizzaDao.savePizza(newPizza);
 			System.out.println("Nouvelle pizza créée");
 
@@ -50,11 +48,7 @@ public class AjouterNouvellePizzaOptionMenu extends AbstractOptionMenu {
 		} catch (DaoException e) {
 			System.err.println("Echec création de pizza");
 		}
-		
-		
-		
-		
-		
+
 		return true;
 	}
 

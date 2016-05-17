@@ -17,8 +17,8 @@ import org.junit.contrib.java.lang.system.SystemErrRule;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
-import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.dao.pizza.PizzaDaoImpl;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.ihm.menu.option.AjouterNouvellePizzaOptionMenu;
 import fr.pizzeria.model.CategoriePizza;

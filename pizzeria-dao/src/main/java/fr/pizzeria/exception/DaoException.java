@@ -1,5 +1,6 @@
 package fr.pizzeria.exception;
 
+@SuppressWarnings("serial")
 public class DaoException extends Exception {
 
 	public DaoException() {

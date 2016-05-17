@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.pizza;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import fr.pizzeria.exception.DaoException;
-import fr.pizzeria.exception.DeletePizzaException;
-import fr.pizzeria.exception.SavePizzaException;
-import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.exception.*;
+//import fr.pizzeria.exception.DeletePizzaException;
+//import fr.pizzeria.exception.SavePizzaException;
+//import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -20,15 +20,15 @@ public class PizzaDaoImpl implements IPizzaDao {
 	private Map<String, Pizza> pizzas = new HashMap<String, Pizza>();
 
 	public PizzaDaoImpl() {
-		pizzas.put("PEP", new Pizza("PEP", "Pépéroni", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
-		pizzas.put("MAR", new Pizza("MAR", "Margherita", BigDecimal.valueOf(1140),  CategoriePizza.SANS_VIANDE));
-		pizzas.put("REI", new Pizza("REI", "La Reine", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
-		pizzas.put("FRO", new Pizza("FRO", "La 4 fromages", BigDecimal.valueOf(12.50),  CategoriePizza.SANS_VIANDE));
-		pizzas.put("CAN", new Pizza("CAN", "La cannibale", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
-		pizzas.put("SAV", new Pizza("SAV", "La savoyarde", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
-		pizzas.put("ORI", new Pizza("ORI", "L'orientale",BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
-		pizzas.put("IND", new Pizza("IND", "L'indienne", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));
-		pizzas.put("SAU", new Pizza("SAU", "La Saumonéta", BigDecimal.valueOf(12.50), CategoriePizza.POISSON));
+		pizzas.put("PEP", new Pizza("PEP", "Pépéroni", new BigDecimal("12.50"), CategoriePizza.VIANDE));
+		pizzas.put("MAR", new Pizza("MAR", "Margherita",new BigDecimal("11.40"),  CategoriePizza.SANS_VIANDE));
+		pizzas.put("REI", new Pizza("REI", "La Reine",new BigDecimal("12.50"), CategoriePizza.VIANDE));
+		pizzas.put("FRO", new Pizza("FRO", "La 4 fromages",new BigDecimal("12.50"),  CategoriePizza.SANS_VIANDE));
+		pizzas.put("CAN", new Pizza("CAN", "La cannibale",new BigDecimal("12.50"), CategoriePizza.VIANDE));
+		pizzas.put("SAV", new Pizza("SAV", "La savoyarde",new BigDecimal("12.50"), CategoriePizza.VIANDE));
+		pizzas.put("ORI", new Pizza("ORI", "L'orientale",new BigDecimal("12.50"), CategoriePizza.VIANDE));
+		pizzas.put("IND", new Pizza("IND", "L'indienne",new BigDecimal("12.50"), CategoriePizza.VIANDE));
+		pizzas.put("SAU", new Pizza("SAU", "La Saumonéta",new BigDecimal("12.40"), CategoriePizza.POISSON));
 	}
 	
 	@Override

@@ -4,8 +4,8 @@ import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.Scanner;
 
-import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoDB;
+import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.dao.pizza.PizzaDaoDB;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
 

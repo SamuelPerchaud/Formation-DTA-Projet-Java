@@ -3,7 +3,8 @@ package fr.pizzeria.ihm.menu.option;
 import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.Optional;
-import fr.pizzeria.dao.IPizzaDao;
+
+import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
 

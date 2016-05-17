@@ -10,12 +10,11 @@ import java.util.logging.Level;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoFichier;
-import fr.pizzeria.dao.PizzaDaoDB;
-
-import fr.pizzeria.dao.PizzaDaoImpl;
-import fr.pizzeria.dao.PizzaDaoJPA;
+import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.dao.pizza.PizzaDaoDB;
+import fr.pizzeria.dao.pizza.PizzaDaoFichier;
+import fr.pizzeria.dao.pizza.PizzaDaoImpl;
+import fr.pizzeria.dao.pizza.PizzaDaoJPA;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.ihm.menu.Menu;
 

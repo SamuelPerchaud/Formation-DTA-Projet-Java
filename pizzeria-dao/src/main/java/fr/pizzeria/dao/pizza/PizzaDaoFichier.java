@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.pizza;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -43,7 +43,7 @@ public class PizzaDaoFichier implements IPizzaDao {
 	}
 	
 	private String convertPizzaToString(Pizza p) {
-		return p.getNom() + ";" + p.getPrix() + ";" + p.getCategorie().name();
+		return p.getNom() + ";" + p.getNouveauPrix() + ";" + p.getCategorie().name();
 	}
 	
 

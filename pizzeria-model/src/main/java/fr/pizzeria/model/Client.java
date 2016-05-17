@@ -6,10 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
-//@NamedQuery(name="pizza.getcode",query="SELECT p FROM Pizza p WHERE p.code=:code")
+@NamedQuery(name="client.getnom",query="SELECT p FROM Client p WHERE p.nom=:nom")
 public class Client {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)	

@@ -13,7 +13,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.dao.pizza.PizzaDaoImpl;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;

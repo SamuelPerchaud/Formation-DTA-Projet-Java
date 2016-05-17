@@ -1,9 +1,8 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.pizza;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,7 +20,7 @@ import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoDB implements IPizzaDao {
-	private Path repertoire = Paths.get("data");
+	//private Path repertoire = Paths.get("data");
 
 	static {
 		// java.sql.DriverManager.registerDriver(jdbc:mysql:/localhost:3306/pizzeria);

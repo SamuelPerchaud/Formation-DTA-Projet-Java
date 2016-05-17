@@ -1,27 +1,18 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.pizza;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
 import org.apache.commons.collections4.ListUtils;
 
 import fr.pizzeria.exception.DaoException;
@@ -29,7 +20,7 @@ import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoJPA implements IPizzaDao {
-	private Path repertoire = Paths.get("data");
+	// private Path repertoire = Paths.get("data");
 
 	public EntityManagerFactory emf;
 
@@ -102,7 +93,7 @@ public class PizzaDaoJPA implements IPizzaDao {
 
 		} catch (NoResultException e) {
 			em.persist(newPizza);
-			//System.err.println(newPizza);
+			// System.err.println(newPizza);
 			et.commit();
 			em.close();
 			System.err.println("INFO---- pizza inséré  : " + newPizza);
@@ -132,7 +123,7 @@ public class PizzaDaoJPA implements IPizzaDao {
 			pizza.setCategorie(updatePizza.getCategorie());
 		}
 
-		//em.merge(pizza);
+		// em.merge(pizza);
 		System.err.println("la pizza : " + pizza + "a été mise a jour");
 		et.commit();
 		em.close();
@@ -196,7 +187,7 @@ public class PizzaDaoJPA implements IPizzaDao {
 
 		for (List<Pizza> listPizza : test) {
 			for (Pizza pizza : listPizza) {
-				//System.err.println("INFO----IMPORT de " + pizza);
+				// System.err.println("INFO----IMPORT de " + pizza);
 				savePizza(pizza);
 			}
 		}
