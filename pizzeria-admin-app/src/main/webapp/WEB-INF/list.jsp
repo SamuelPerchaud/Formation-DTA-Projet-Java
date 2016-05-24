@@ -55,7 +55,7 @@
 						<td><%=p.getNom()%></td>
 						<td><%=p.getNouveauPrix()%></td>
 						<td><%=p.getCategorie()%></td>
-						<td><a href="<%=request.getContextPath() %>/" class="btn btn-info" role="button">supprimer la Pizza</a></td>
+						<td><a href="<%=request.getContextPath() %>/" class="btn btn-danger" role="button">supprimer la Pizza</a></td>
 					</tr>
 					<%
 						}
@@ -65,8 +65,6 @@
 		</div>
 		
 		
-		
-		<a href="#" class="btn btn-info" role="button">supprimer la Pizza</a>
 		
 		
 	</div>
