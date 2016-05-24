@@ -20,9 +20,9 @@
 
 	<div class="container">
 		<div class="jumbotron">
-			<h1>Bootstrap Tutorial</h1>
-			<p>Bootstrap is the most popular HTML, CSS, and JS framework for
-				developing responsive, mobile-first projects on the web.</p>
+			<h1>PIZZZZZA ! ! !</h1>
+			<p>Bootstrap is the most popular pizza framework for
+				developing responsive, mobile-first pizza on the web.</p>
 		</div>
 
 
@@ -55,7 +55,7 @@
 						<td><%=p.getNom()%></td>
 						<td><%=p.getNouveauPrix()%></td>
 						<td><%=p.getCategorie()%></td>
-						<td><a href="<%=request.getContextPath() %>/" class="btn btn-danger" role="button">supprimer la Pizza</a></td>
+						<td><a href="<%=request.getContextPath() %>/pizzas/edith?code=<%=p.getCode() %>" class="btn btn-danger" role="button">supprimer la Pizza</a></td>
 					</tr>
 					<%
 						}
