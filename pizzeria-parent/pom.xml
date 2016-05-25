@@ -77,6 +77,13 @@
 				<version>3.1.0</version>
 				<scope>provided</scope>
 			</dependency>
+			<!-- http://mvnrepository.com/artifact/javax.servlet/jstl -->
+			<dependency>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+				<scope>provided</scope>
+			</dependency>
 
 
 

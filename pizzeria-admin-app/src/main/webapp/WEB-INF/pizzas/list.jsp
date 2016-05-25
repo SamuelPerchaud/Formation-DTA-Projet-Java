@@ -1,12 +1,12 @@
 <%@page import="java.util.List"%>
 <%@page import="fr.pizzeria.model.Pizza"%>
-
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Bootstrap Example</title>
+<title>Liste des pizzas</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -21,15 +21,9 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h1>PIZZZZZA ! ! !</h1>
-			<p>Bootstrap is the most popular pizza framework for
-				developing responsive, mobile-first pizza on the web.</p>
+			<p>Bootstrap is the most popular pizza framework for developing
+				responsive, mobile-first pizza on the web.</p>
 		</div>
-
-
-
-
-
-
 
 		<div class="container">
 			<h2>Basic Table</h2>
@@ -44,29 +38,33 @@
 						<th>catégorie</th>
 					</tr>
 				</thead>
-				<tbody>
-					<%
-						List<Pizza> listPizzas = (List<Pizza>) request.getAttribute("listPizza");
 
-						for (Pizza p : listPizzas) {
-					%>
-					<tr>
-						<td><%=p.getCode()%></td>
-						<td><%=p.getNom()%></td>
-						<td><%=p.getNouveauPrix()%></td>
-						<td><%=p.getCategorie()%></td>
-						<td><a href="<%=request.getContextPath() %>/pizzas/edith?code=<%=p.getCode() %>" class="btn btn-danger" role="button">supprimer la Pizza</a></td>
-					</tr>
-					<%
-						}
-					%>
+
+				<tbody>
+
+
+					<c:forEach var="pizza" items="${listPizza}">
+						<tr id="tr-${pizza}">
+
+							<td>${pizza.code}</td>
+							<td>${pizza.nom}</td>
+							<td>${pizza.prix}</td>
+							<td>${pizza.categorie}</td>
+							<td></td>
+							<td><a href="<c:url value='/pizzas/editer?code=${pizza.code}' />">editer</a></td>
+							<td></td>
+					</c:forEach>
+
+
+
+
 				</tbody>
 			</table>
 		</div>
-		
-		
-		
-		
+
+
+
+
 	</div>
 
 </body>

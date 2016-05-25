@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,9 +23,9 @@ import fr.pizzeria.model.Pizza;
 public class ListerPizzaControlleur extends HttpServlet {
 
 	private static final Logger LOG = Logger.getLogger(ListerPizzaControlleur.class.toString());
-
-	private IPizzaDao pizzaDao = new PizzaDaoImpl();
-
+	
+	private IPizzaDao pizzaDao = IPizzaDao.DEFAULT_IMPLEMENTATION;
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -33,7 +34,7 @@ public class ListerPizzaControlleur extends HttpServlet {
 
 			RequestDispatcher dispatcher = this.getServletContext()
 
-					.getRequestDispatcher("/WEB-INF/list.jsp");
+					.getRequestDispatcher("/WEB-INF/pizzas/list.jsp");
 
 			dispatcher.forward(req, resp);
 
