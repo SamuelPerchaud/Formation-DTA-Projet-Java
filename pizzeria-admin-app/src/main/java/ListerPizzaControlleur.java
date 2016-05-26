@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
+import fi.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.dao.pizza.PizzaDaoImpl;
 import fr.pizzeria.dao.pizza.PizzaDaoJPA;
@@ -24,12 +27,12 @@ public class ListerPizzaControlleur extends HttpServlet {
 
 	private static final Logger LOG = Logger.getLogger(ListerPizzaControlleur.class.toString());
 	
-	private IPizzaDao pizzaDao = IPizzaDao.DEFAULT_IMPLEMENTATION;
-	
+	@Inject private PizzaService  pizzaService;
+	//@Named("DaoUtilisé")
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			List<Pizza> listPizzas = pizzaDao.findAllPizzas();
+			List<Pizza> listPizzas = pizzaService.findAllPizzas();
 			req.setAttribute("listPizza", listPizzas);
 
 			RequestDispatcher dispatcher = this.getServletContext()
@@ -67,10 +70,10 @@ public class ListerPizzaControlleur extends HttpServlet {
 		} else {
 			Pizza newPizza = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.valueOf(cat));
 			try {
-				pizzaDao.savePizza(newPizza);
+				pizzaService.savePizza(newPizza);
 				LOG.info("Nouvelle pizza créée");
 			} catch (DaoException e) {
-				resp.sendError(500, "Désolé :(");
+				resp.sendError(500, "Désolé post :(");
 			} catch (NumberFormatException e) {
 				resp.sendError(400, "Format nombre KO :(");
 			} catch (SQLException e) {

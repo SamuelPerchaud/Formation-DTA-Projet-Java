@@ -84,6 +84,12 @@
 				<version>1.2</version>
 				<scope>provided</scope>
 			</dependency>
+			<!-- http://mvnrepository.com/artifact/javax.enterprise/cdi-api -->
+			<dependency>
+				<groupId>javax.enterprise</groupId>
+				<artifactId>cdi-api</artifactId>
+				<version>1.2</version>
+			</dependency>
 
 
 

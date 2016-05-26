@@ -46,7 +46,7 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>LoginPizza</servlet-name>
-		<url-pattern>/pizzas/login</url-pattern>
+		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
 
 

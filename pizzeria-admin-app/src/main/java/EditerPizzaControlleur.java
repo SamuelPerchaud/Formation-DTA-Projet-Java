@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.inject.Inject;
 import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
+import fi.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.dao.pizza.PizzaDaoJPA;
 import fr.pizzeria.exception.DaoException;
@@ -20,7 +22,7 @@ import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class EditerPizzaControlleur extends HttpServlet {
-	private IPizzaDao pizzaDao = IPizzaDao.DEFAULT_IMPLEMENTATION;
+	@Inject private PizzaService  pizzaService;
 	private static final Logger LOG = Logger.getLogger(EditerPizzaControlleur.class.toString());
 	//private IPizzaDao pizzaDao =  new PizzaDaoJPA(Persistence.createEntityManagerFactory( "pizzeria-console-objet-java8" ));;
 
@@ -29,7 +31,7 @@ public class EditerPizzaControlleur extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			List<Pizza> pizzas = pizzaDao.findAllPizzas();
+			List<Pizza> pizzas = pizzaService.findAllPizzas();
 			req.setAttribute("listPizza", pizzas);
 			String codePizza =(String) req.getAttribute("code");
 			
@@ -78,9 +80,9 @@ public class EditerPizzaControlleur extends HttpServlet {
 		} else {
 			Pizza updatePizza = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.valueOf(cat));
 			try {
-				pizzaDao.updatePizza(req.getParameter("anciencode"),updatePizza);
+				pizzaService.updatePizza(req.getParameter("anciencode"),updatePizza);
 				LOG.info("Nouvelle pizza créée");
-				resp.sendRedirect("http://localhost:8082/pizzeria-admin-app/pizzas/list");
+				resp.sendRedirect(req.getContextPath()+"/pizzas/list");
 				//RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/pizzas/list.jsp");
 				//dispatcher.forward(req, resp);
 			} catch (DaoException e) {
