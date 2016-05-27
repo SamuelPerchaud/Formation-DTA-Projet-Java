@@ -10,11 +10,14 @@ import java.util.logging.Level;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import fr.pizzeria.dao.DaoFactory;
+import fr.pizzeria.dao.DaoProducer;
 import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.dao.pizza.PizzaDaoDB;
 import fr.pizzeria.dao.pizza.PizzaDaoFichier;
 import fr.pizzeria.dao.pizza.PizzaDaoImpl;
 import fr.pizzeria.dao.pizza.PizzaDaoJPA;
+import fr.pizzeria.dao.pizza.PizzaDaoRest;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.ihm.menu.Menu;
 
@@ -61,9 +64,9 @@ public class PizzaAdminConsole {
 			java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
 			//java.util.logging.Logger.getLogger("SSL").setLevel(Level.SEVERE);
 			//System.setProperty("jsse.enableSNIExtension", "false");
-		    entityManagerFactory = Persistence.createEntityManagerFactory( "pizzeria-console-objet-java8" );
-
-				daoImpl = new PizzaDaoJPA(entityManagerFactory);
+		    //entityManagerFactory = Persistence.createEntityManagerFactory( "pizzeria-console-objet-java8" );
+		    //DaoFactory dao = new DaoProducer().getDaoFactoryJPA(entityManagerFactory);
+				daoImpl = new PizzaDaoRest();
 				break;
 				
 				

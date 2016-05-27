@@ -29,7 +29,10 @@
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
-			
+		<!-- http://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
+
+
+
 
 	</dependencies>
 	<build>

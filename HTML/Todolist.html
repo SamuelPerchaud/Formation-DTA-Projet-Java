@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-1.12.3.js"></script>
+    <script>
+      $(function() {
+
+          var $list, $newItemForm;
+          $list = $('ul');
+          $newItemForm = $('#newItemForm');
+
+          $newItemForm.on('submit', function(e) {
+          e.preventDefault();
+          var text = $('input:text').val();
+          if (text != "") {
+              $list.append('<li>' + text + '</li>');
+              $('input:text').val('');            
+          }
+          });
+
+          $list.on('click', 'li', function() {
+          var $this = $(this);
+          $this.remove();
+          });
+
+      });
+    </script>
+    <style>
+        body {
+         
+        }
+      
+        /* À compléter */
+      
+    </style>
+</head>
+
+<body>
+  <div id="list_section">
+    <h1 id="header">Todo list</h1>
+    <ul>
+      <li class="item">Une première tâche</li>
+    </ul>
+    <form id="newItemForm">
+      <input type="text" id="itemField" placeholder="Élément" />
+      <input type="submit" id="add" value="Ajouter" />
+    </form>
+  </div>
+</body>
+
+</html>

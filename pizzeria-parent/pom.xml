@@ -83,8 +83,17 @@
 				<version>5.1.0.Final</version>
 				<scope>runtime</scope>
 			</dependency>
-
-
+			<!-- http://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-client -->
+			<dependency>
+				<groupId>org.glassfish.jersey.core</groupId>
+				<artifactId>jersey-client</artifactId>
+				<version>2.22.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.jersey.media</groupId>
+				<artifactId>jersey-media-json-jackson</artifactId>
+				<version>2.22</version>
+			</dependency>
 
 
 		</dependencies>
