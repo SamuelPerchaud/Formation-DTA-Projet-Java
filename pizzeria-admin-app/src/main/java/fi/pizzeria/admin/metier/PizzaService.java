@@ -18,6 +18,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.collections4.ListUtils;
 
@@ -26,17 +34,24 @@ import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
+
+@Path("/pizzas")
 @Stateless
 public class PizzaService  {
 	@Inject private IPizzaDao pizzaDao;
 	@PersistenceContext(unitName="pizzeria-admin-app") private EntityManager em;
 	
+	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<Pizza> findAllPizzas() throws DaoException, SQLException {
 		List<Pizza> listPizza = em.createQuery("SELECT p FROM Pizza p", Pizza.class).getResultList();
 		return listPizza;
 	}
 
-	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
 	public void savePizza(Pizza newPizza) throws DaoException, SQLException {
 		Pizza pizza = null;
 		try {
@@ -53,14 +68,15 @@ public class PizzaService  {
 
 	}
 
-	
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException, SQLException {
 		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code", codePizza)
 				.getSingleResult();
 		if (pizza != null) {
 			pizza.setCode(updatePizza.getCode());
 			pizza.setNom(updatePizza.getNom());
-			pizza.setPrix(updatePizza.getNouveauPrix());
+			pizza.setPrix(updatePizza.getPrix());
 			pizza.setCategorie(updatePizza.getCategorie());
 		}
 
@@ -68,7 +84,8 @@ public class PizzaService  {
 		System.err.println("la pizza : " + pizza + "a été mise a jour");
 		}
 
-	
+	@DELETE
+	@Produces(MediaType.APPLICATION_JSON)
 	public void deletePizza(String codePizza)  {
 		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code", codePizza)
 				.getSingleResult();
@@ -79,7 +96,7 @@ public class PizzaService  {
 	}		
 	
 
-	@PostConstruct
+	//@PostConstruct
 	public void importPizza() {
 		List<List<Pizza>> test = new ArrayList<List<Pizza>>();
 		List<Pizza> listPizza;

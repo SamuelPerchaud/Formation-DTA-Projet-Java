@@ -79,7 +79,7 @@ public class PizzaDaoDB implements IPizzaDao {
 
 		int nbpizzas = statement.executeUpdate(String.format(
 				"INSERT INTO `pizza` (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES (NULL, '%s', '%s', '%s', '%s')",
-				newPizza.getCode(), newPizza.getNom(), newPizza.getNouveauPrix(), newPizza.getCategorie().toString()));
+				newPizza.getCode(), newPizza.getNom(), newPizza.getPrix(), newPizza.getCategorie().toString()));
 
 		System.out.println(nbpizzas + " pizza inséré");
 

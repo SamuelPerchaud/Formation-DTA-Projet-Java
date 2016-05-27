@@ -22,7 +22,7 @@ public class ListerPizzaOptionMenu extends AbstractOptionMenu {
 		
 		
 		pizzaDao.findAllPizzas().stream()
-		.sorted(Comparator.comparing(Pizza::getNouveauPrix))
+		.sorted(Comparator.comparing(Pizza::getPrix))
 		
 		.forEach(System.out::println);
 		//.collect(Collectors.groupingBy(Pizza::getCategorie))

@@ -23,7 +23,7 @@ public class TrouverPizzaMaxOptionMenu extends AbstractOptionMenu {
 		
 		
 		Optional<Pizza> test =  pizzaDao.findAllPizzas().stream()
-		.max(Comparator.comparing(Pizza::getNouveauPrix));
+		.max(Comparator.comparing(Pizza::getPrix));
 		//.sorted(Comparator.comparing(Pizza::getNouveauPrix))
 		System.out.println(test);
 		//.forEach(System.out::println);

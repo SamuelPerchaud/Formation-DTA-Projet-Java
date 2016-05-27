@@ -120,12 +120,9 @@ public class Pizza {
 	 * 
 	 * @return
 	 */
-	@Deprecated
-	public BigDecimal getPrix() {
-		return prix;
-	}
 
-	public BigDecimal getNouveauPrix() {
+
+	public BigDecimal getPrix() {
 		// super algo
 		return prix;
 	}

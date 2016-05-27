@@ -119,7 +119,7 @@ public class PizzaDaoJPA implements IPizzaDao {
 		if (pizza != null) {
 			pizza.setCode(updatePizza.getCode());
 			pizza.setNom(updatePizza.getNom());
-			pizza.setPrix(updatePizza.getNouveauPrix());
+			pizza.setPrix(updatePizza.getPrix());
 			pizza.setCategorie(updatePizza.getCategorie());
 		}
 

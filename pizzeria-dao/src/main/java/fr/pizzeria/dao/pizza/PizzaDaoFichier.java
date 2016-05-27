@@ -43,7 +43,7 @@ public class PizzaDaoFichier implements IPizzaDao {
 	}
 	
 	private String convertPizzaToString(Pizza p) {
-		return p.getNom() + ";" + p.getNouveauPrix() + ";" + p.getCategorie().name();
+		return p.getNom() + ";" + p.getPrix() + ";" + p.getCategorie().name();
 	}
 	
 

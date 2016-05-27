@@ -28,7 +28,7 @@ public class ListerPizzaGroupeOptionMenu extends AbstractOptionMenu {
 		.forEach((categorie,listePizzas) ->{
 			System.out.println("*****"+categorie.getLibelle().toUpperCase()+"*****");
 			listePizzas.stream()
-				.sorted(Comparator.comparing(Pizza::getCode).thenComparing(Pizza::getNouveauPrix))
+				.sorted(Comparator.comparing(Pizza::getCode).thenComparing(Pizza::getPrix))
 				.forEach(System.out::println);
 		} );
 		
