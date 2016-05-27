@@ -62,7 +62,7 @@
 						<label class="col-md-4 control-label" for="textinput">Prix</label>
 						<div class="col-md-4">
 							<input id="prix" name="prix" type="text"
-								placeholder="<%=pizza.getNouveauPrix()%>"
+								placeholder="<%=pizza.getPrix()%>"
 								class="form-control input-md">
 
 						</div>

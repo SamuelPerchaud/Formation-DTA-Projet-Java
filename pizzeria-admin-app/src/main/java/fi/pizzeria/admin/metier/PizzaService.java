@@ -83,10 +83,13 @@ public class PizzaService  {
 		// em.merge(pizza);
 		System.err.println("la pizza : " + pizza + "a été mise a jour");
 		}
-
+	
+	
+	
 	@DELETE
+	@Path("/{code}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void deletePizza(String codePizza)  {
+	public void deletePizza(@PathParam("code") String codePizza)  {
 		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code", codePizza)
 				.getSingleResult();
 		em.remove(pizza);
