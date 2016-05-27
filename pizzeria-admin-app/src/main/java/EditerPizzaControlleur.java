@@ -80,7 +80,7 @@ public class EditerPizzaControlleur extends HttpServlet {
 		} else {
 			Pizza updatePizza = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.valueOf(cat));
 			try {
-				pizzaService.updatePizza(req.getParameter("anciencode"),updatePizza);
+				pizzaService.updatePizza(updatePizza);
 				LOG.info("Nouvelle pizza créée");
 				resp.sendRedirect(req.getContextPath()+"/pizzas/list");
 				//RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/pizzas/list.jsp");

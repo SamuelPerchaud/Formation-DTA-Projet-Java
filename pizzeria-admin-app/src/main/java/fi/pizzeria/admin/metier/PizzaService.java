@@ -70,8 +70,8 @@ public class PizzaService  {
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
-	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException, SQLException {
-		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code", codePizza)
+	public void updatePizza(Pizza updatePizza) throws DaoException, SQLException {
+		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code", updatePizza.getCode())
 				.getSingleResult();
 		if (pizza != null) {
 			pizza.setCode(updatePizza.getCode());
