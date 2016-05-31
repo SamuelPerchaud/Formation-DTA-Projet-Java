@@ -30,6 +30,14 @@ public class PizzaDaoDB implements IPizzaDao {
 	private static List<Pizza> pizzas = new ArrayList<Pizza>();
 	private static List<List<Pizza>> test = new ArrayList<List<Pizza>>();
 
+	/**
+	 * 
+	 */
+	public PizzaDaoDB() {
+		super();
+		System.err.println("INFO---- Utilisation du l'implémentation JDBC");
+	}
+
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException, SQLException {
 

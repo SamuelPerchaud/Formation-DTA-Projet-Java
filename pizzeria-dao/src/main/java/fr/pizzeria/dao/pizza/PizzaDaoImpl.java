@@ -30,6 +30,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 		pizzas.put("ORI", new Pizza("ORI", "L'orientale",new BigDecimal("12.50"), CategoriePizza.VIANDE));
 		pizzas.put("IND", new Pizza("IND", "L'indienne",new BigDecimal("12.50"), CategoriePizza.VIANDE));
 		pizzas.put("SAU", new Pizza("SAU", "La Saumonéta",new BigDecimal("12.40"), CategoriePizza.POISSON));
+		System.err.println("INFO---- Utilisation du l'implémentation mémoire");
 	}
 	
 	@Override

@@ -28,8 +28,10 @@ public class PizzaDaoJPA implements IPizzaDao {
 	 * @param entityManagerFactory
 	 */
 	public PizzaDaoJPA(EntityManagerFactory entityManagerFactory) {
+		
 		super();
 		this.emf = entityManagerFactory;
+		System.err.println("INFO---- Utilisation du l'implémentation JPA");
 	}
 
 	private static final String REPERTOIRE_DATA = "data";

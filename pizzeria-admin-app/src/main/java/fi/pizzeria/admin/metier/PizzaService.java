@@ -26,6 +26,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.apache.commons.collections4.ListUtils;
 
@@ -49,7 +51,18 @@ public class PizzaService  {
 		List<Pizza> listPizza = em.createQuery("SELECT p FROM Pizza p", Pizza.class).getResultList();
 		return listPizza;
 	}
+	//test de CORS Cross Origin Ressource Sharing
+	/**public Response findAllPizzas() throws DaoException, SQLException {
+		List<Pizza> listPizza = em.createQuery("SELECT p FROM Pizza p", Pizza.class).getResultList();
+		ResponseBuilder resBuilder = Response.ok();
+		resBuilder.entity(listPizza);
+		resBuilder.header("Access-Control-Allow-Origin", "http://localhost/");
+		return resBuilder.build();
+	}*/
 
+	
+	
+	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public void savePizza(Pizza newPizza) throws DaoException, SQLException {
