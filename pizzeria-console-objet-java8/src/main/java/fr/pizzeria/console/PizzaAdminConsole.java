@@ -7,19 +7,9 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import fr.pizzeria.dao.DaoFactory;
-import fr.pizzeria.dao.DaoProducer;
 import fr.pizzeria.dao.pizza.IPizzaDao;
-import fr.pizzeria.dao.pizza.PizzaDaoDB;
-import fr.pizzeria.dao.pizza.PizzaDaoFichier;
-import fr.pizzeria.dao.pizza.PizzaDaoImpl;
-import fr.pizzeria.dao.pizza.PizzaDaoJPA;
-import fr.pizzeria.dao.pizza.PizzaDaoRest;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.ihm.menu.Menu;
 
@@ -28,7 +18,8 @@ public class PizzaAdminConsole {
 	static IPizzaDao daoImpl;
 
 	public static void main(String[] args) throws IOException, DaoException, ClassNotFoundException, SQLException {
-
+		java.util.logging.Logger.getLogger("SSL").setLevel(Level.SEVERE);
+		java.util.logging.Logger.getLogger("org").setLevel(Level.SEVERE);
 		Locale.setDefault(Locale.FRENCH);
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
@@ -39,7 +30,7 @@ public class PizzaAdminConsole {
 				ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(confString,
 						"application-config.xml")) {
 			Menu menu = context.getBean(Menu.class);
-			java.util.logging.Logger.getLogger("SSL").setLevel(Level.SEVERE);
+
 			menu.afficher();
 		}
 
