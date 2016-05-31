@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import fr.pizzeria.exception.DaoException;
@@ -23,6 +24,7 @@ import fr.pizzeria.model.Pizza;
 
 @Component
 @Qualifier("PizzaDaoDB")
+@Lazy
 public class PizzaDaoDB implements IPizzaDao {
 	//private Path repertoire = Paths.get("data");
 
