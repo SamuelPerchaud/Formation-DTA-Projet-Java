@@ -27,9 +27,8 @@ public class PizzaAdminConsole {
 		String confString = bundle.getString("dao.impl");
 		String confString2 = bundle.getString("dao.profile");
 		System.err.println("INFO---- Valeur du parametre dao : " + confString + " valeur du profile : " + confString2);
-
-		try (Scanner sc = new Scanner(System.in);
-				AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(PizzeriaAppSpringConfig.class)) {
+		// Scanner sc = new Scanner(System.in);
+		try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(PizzeriaAppSpringConfig.class)) {
 			Menu menu = context.getBean(Menu.class);
 
 			menu.afficher();

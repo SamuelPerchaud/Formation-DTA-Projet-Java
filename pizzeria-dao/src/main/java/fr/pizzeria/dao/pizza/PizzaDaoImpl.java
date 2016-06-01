@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import fr.pizzeria.exception.*;
@@ -17,8 +18,8 @@ import fr.pizzeria.exception.*;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-@Component
-@Qualifier("PizzaDaoImpl")
+
+//@Qualifier("PizzaDaoImpl")
 public class PizzaDaoImpl implements IPizzaDao {
 	
 	private Map<String, Pizza> pizzas = new HashMap<String, Pizza>();

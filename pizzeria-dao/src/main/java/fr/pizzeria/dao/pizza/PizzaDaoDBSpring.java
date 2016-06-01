@@ -13,107 +13,89 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.activation.DataSource;
+import javax.inject.Inject;
+
 import org.apache.commons.collections4.ListUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-//@Component
-//@Qualifier("PizzaDaoDB")
+@Component
 @Lazy
-public class PizzaDaoDB implements IPizzaDao {
-	//private Path repertoire = Paths.get("data");
+@Transactional
+public class PizzaDaoDBSpring implements IPizzaDao {
 
-	static {
-		// java.sql.DriverManager.registerDriver(jdbc:mysql:/localhost:3306/pizzeria);
+	@Autowired
+	private BatchPizzaJdbcTemplate batch;
 
-	}
 	private static final String REPERTOIRE_DATA = "data";
 	private static List<Pizza> pizzas = new ArrayList<Pizza>();
 	private static List<List<Pizza>> test = new ArrayList<List<Pizza>>();
 
+	private TransactionTemplate txTemplate;
+	private JdbcTemplate jdbcTemplate;
+
 	/**
 	 * 
 	 */
-	public PizzaDaoDB() {
+	@Autowired
+	public PizzaDaoDBSpring(javax.sql.DataSource dataSource) {
 		super();
-		System.err.println("INFO---- Utilisation du l'implémentation JDBC");
+		System.err.println("INFO---- Utilisation du l'implémentation JDBC de Spring");
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException, SQLException {
-
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzeria", "root", "");
-		Statement statement = connection.createStatement();
-		// jdbc:mysql://localhost:3306/pizzeria
-		// Connection connection =
-		// DriverManager.getConnection(//localhost:3306/pizzeria);
-		ResultSet resultats = statement.executeQuery("SELECT * FROM PIZZA");
 		List<Pizza> listResultat = new ArrayList<Pizza>();
+		String sql = "SELECT * FROM PIZZA";
+		return jdbcTemplate.query(sql, new PizzaMapper());
 
-		while (resultats.next()) {
-
-			Pizza pizza = new Pizza();
-
-			pizza.setCode(resultats.getString("CODE"));
-			pizza.setNom(resultats.getString("NOM"));
-			pizza.setPrix(resultats.getBigDecimal("PRIX"));
-			pizza.setCategorie(CategoriePizza.valueOf(resultats.getString("CATEGORIE")));
-			listResultat.add(pizza);
-
-		}
-
-		// List<Pizza> ListResultat = resultats.;
-		/**
-		 * try { return Files.list(repertoire) .map(path -> { Pizza p = new
-		 * Pizza(); p.setCode(path.getFileName().toString().replaceAll(".txt",
-		 * "")); try { String ligne = Files.readAllLines(path).get(0); String[]
-		 * ligneTab = ligne.split(";"); p.setNom(ligneTab[0]);
-		 * p.setPrix(Double.valueOf(ligneTab[1]));
-		 * p.setCategorie(CategoriePizza.valueOf(ligneTab[2])); } catch
-		 * (Exception e) { e.printStackTrace(); }
-		 * 
-		 * return p; }) .collect(Collectors.toList()); } catch (IOException e) {
-		 * throw new DaoException(e); }
-		 */
-		return listResultat;
 	}
 
 	@Override
 	public void savePizza(Pizza newPizza) throws DaoException, SQLException {
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzeria", "root", "");
-		Statement statement = connection.createStatement();
-		// ResultSet resultats = statement.executeQuery("INSERT INTO `pizza`
-		// (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES
-		// (NULL,'"+newPizza.getId()+"','"+newPizza.getNom()+"','"+newPizza.getNouveauPrix()+"','"+newPizza.getCategorie().toString()+"'");
-
-		int nbpizzas = statement.executeUpdate(String.format(
+		String sql = String.format(
 				"INSERT INTO `pizza` (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES (NULL, '%s', '%s', '%s', '%s')",
-				newPizza.getCode(), newPizza.getNom(), newPizza.getPrix(), newPizza.getCategorie().toString()));
-
+				newPizza.getCode(), newPizza.getNom(), newPizza.getPrix(), newPizza.getCategorie().toString());
+		int nbpizzas = jdbcTemplate.update(sql);
 		System.out.println(nbpizzas + " pizza inséré");
 
 	}
 
 	@Override
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
-		// TODO Auto-generated method stub
+		// UPDATE `pizza` SET `categorie` = 'POISSON', `code` = 'RETEST', `nom`
+		// = 'resdfsfs', `prix` = '1599.00' WHERE `pizza`.`id` = 2
+
+		String sql = String.format(
+				"UPDATE `pizza` SET `code` = '%s',`nom` = '%s', `prix` = '%s',`categorie` = '%s'    WHERE `pizza`.`code` = '%s'",
+				updatePizza.getCode(), updatePizza.getNom(), updatePizza.getPrix(),
+				updatePizza.getCategorie().toString(), codePizza);
+		int nbpizzas = jdbcTemplate.update(sql);
+		System.out.println(nbpizzas + " pizza modifié");
 
 	}
 
 	@Override
 	public void deletePizza(String codePizza) throws DaoException, SQLException {
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzeria", "root", "");
-		Statement statement = connection.createStatement();
 		// ResultSet resultats = statement.executeQuery("INSERT INTO `pizza`
 		// (`ID`, `CODE`, `NOM`, `PRIX`, `CATEGORIE`) VALUES
 		// (NULL,'"+newPizza.getId()+"','"+newPizza.getNom()+"','"+newPizza.getNouveauPrix()+"','"+newPizza.getCategorie().toString()+"'");
-
-		int nbpizzas = statement.executeUpdate(String.format("DELETE FROM `pizza` WHERE CODE = '%s'", codePizza));
+		String sql = String.format("DELETE FROM `pizza` WHERE CODE = '%s'", codePizza);
+		int nbpizzas = jdbcTemplate.update(sql);
 		// newPizza.getCode(), newPizza.getNom(), newPizza.getNouveauPrix(),
 		// newPizza.getCategorie().toString()));
 
@@ -124,6 +106,7 @@ public class PizzaDaoDB implements IPizzaDao {
 	}
 
 	@Override
+	@Transactional
 	public void importPizza() throws DaoException, SQLException {
 		try {
 			pizzas = Files.list(Paths.get(REPERTOIRE_DATA)).map(path -> {
@@ -147,10 +130,21 @@ public class PizzaDaoDB implements IPizzaDao {
 		test = ListUtils.partition(pizzas, 3);
 
 		for (List<Pizza> listPizza : test) {
-			for (Pizza pizza : listPizza) {
-				System.out.println("TEST" + pizza);
-				savePizza(pizza);
-			}
+			batch.savePizzaMultiple(listPizza);
+		}
+	}
+
+	public class PizzaMapper implements RowMapper<Pizza> {
+
+		@Override
+		public Pizza mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Pizza pizza = new Pizza();
+			pizza.setId(rs.getInt("ID"));
+			pizza.setCode(rs.getString("CODE"));
+			pizza.setNom(rs.getString("NOM"));
+			pizza.setPrix(new BigDecimal(rs.getString("PRIX")));
+			pizza.setCategorie(CategoriePizza.valueOf(rs.getString("CATEGORIE")));
+			return pizza;
 		}
 	}
 
