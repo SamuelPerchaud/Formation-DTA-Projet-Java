@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.test_implementation;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -15,6 +15,7 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import fr.pizzeria.dao.config.PizzaDaoConfigJDBC;
 import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.dao.pizza.PizzaDaoDBSpring;
 import fr.pizzeria.exception.DaoException;
@@ -22,12 +23,11 @@ import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = PizzaDaoConfigTest.class)
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
-public abstract class PizzaDaoJPASpringTest {
+public abstract class GenericPizzaDaoSpringTest {
 
 	private static final int NB_PIZZA_DE_DEPART = 4;
-	@Autowired
+
 	protected IPizzaDao pizzaDao;
 
 	@Test
@@ -35,9 +35,20 @@ public abstract class PizzaDaoJPASpringTest {
 		List<Pizza> pizzas = pizzaDao.findAllPizzas();
 		Assert.assertEquals(NB_PIZZA_DE_DEPART, pizzas.size());
 	}
+	
+	@Test
+	public void testsavePizza() throws DaoException, SQLException {
+		System.out.println("Pizza de depart : " + NB_PIZZA_DE_DEPART);
+		Pizza testAjout = new Pizza(null, "PEP 1", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE);
+		//List<Pizza> pizzas = pizzaDao.findAllPizzas();
+		pizzaDao.savePizza(testAjout);
+		List<Pizza> pizzas2 = pizzaDao.findAllPizzas();
+		System.out.println("nombre de Pizzas après ajout : " + pizzas2.size());
+		Assert.assertEquals((NB_PIZZA_DE_DEPART + 1), pizzas2.size());
+	}
+	
 
 	@Test
-	// @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 	public void testimportPizza() throws DaoException, SQLException {
 		System.out.println("Pizza de depart : " + NB_PIZZA_DE_DEPART);
 		List<Pizza> pizzas = pizzaDao.findAllPizzas();
@@ -48,7 +59,6 @@ public abstract class PizzaDaoJPASpringTest {
 	}
 
 	@Test
-	// @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 	public void testrollback() throws DaoException, SQLException {
 		List<Pizza> pizzas = getListePizzasWithErrors();
 //		System.out.println("Pizza de depart : " + NB_PIZZA_DE_DEPART);

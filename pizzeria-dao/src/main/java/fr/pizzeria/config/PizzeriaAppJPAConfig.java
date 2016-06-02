@@ -1,4 +1,4 @@
-package fr.pizzeria.console.configSpring;
+package fr.pizzeria.config;
 
 import java.util.Scanner;
 
@@ -12,26 +12,25 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import fr.pizzeria.config.PizzeriaAppSpringDataConfig;
 import fr.pizzeria.dao.pizza.BatchPizzaJdbcTemplate;
 import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.dao.pizza.PizzaDaoRest;
 
 @Configuration
-@ComponentScan({"fr.pizzeria.dao","fr.pizzeria.ihm"})
+@ComponentScan("fr.pizzeria.dao")
 @EnableTransactionManagement
-@Import(PizzeriaAppSpringDataConfig.class)
-public class PizzeriaAppSpringConfig {
+public class PizzeriaAppJPAConfig {
 
+/*
 	@Bean
 	@Lazy
-	public EntityManagerFactory entityManagerFactory() {
+	public EntityManagerFactory getEmf() {
 		return javax.persistence.Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");
 	}
 
@@ -39,11 +38,24 @@ public class PizzeriaAppSpringConfig {
 	public Scanner getScanner() {
 		return new Scanner(System.in);
 	}
-
-
+*/
+	@Bean
+	public DataSource dataSource() {
+		return new DriverManagerDataSource("jdbc:mysql://localhost:3306/pizzeria", "root", "");
+	}
 		
+	@Bean
+    public PlatformTransactionManager transactionManager() {
+        return new JpaTransactionManager();
+    }
 	
-	
-	
+	//
+	@Bean
+	@Qualifier("daoImpl")
+	public IPizzaDao getPizzaDao(@Qualifier("pizzaDaoJPASpring") IPizzaDao pizzaDao) {
+		return pizzaDao;
+	}
+
+
 	
 }

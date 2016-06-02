@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.config;
 
 import java.util.Scanner;
 
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -18,11 +19,13 @@ import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import fr.pizzeria.config.PizzeriaAppJDBCSpringConfig;
 import fr.pizzeria.dao.pizza.IPizzaDao;
 
 @Configuration
-@ComponentScan("fr.pizzeria")
-public class PizzaDaoConfigTest {
+@ComponentScan("fr.pizzeria.dao")
+//@Import(PizzeriaAppJDBCSpringConfig.class)
+public class PizzaDaoConfigJDBC {
 
 	@Bean
 	public DataSource dataSource() {
@@ -31,7 +34,7 @@ public class PizzaDaoConfigTest {
 	
 	
 	@Bean
-	public PlatformTransactionManager txManager(){
+	public PlatformTransactionManager TxManager(){
 		return new DataSourceTransactionManager(dataSource());
 	}
 	

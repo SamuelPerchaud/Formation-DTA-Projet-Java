@@ -7,12 +7,12 @@
 		<class>fr.pizzeria.model.Livreur</class>
 		<class>fr.pizzeria.model.Pizza</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:testbd"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:testdb"/>
 			<property name="javax.persistence.jdbc.user" value="sa"/>
 			<property name="javax.persistence.jdbc.password" value=""/>
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-			<property name="javax.persistence.schema-generation.create-database-schemas" value="false"/>
+			<!--<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+			  <property name="javax.persistence.schema-generation.create-database-schemas" value="false"/>-->
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>
 	</persistence-unit>

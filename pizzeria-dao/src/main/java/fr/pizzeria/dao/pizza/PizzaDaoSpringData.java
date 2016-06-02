@@ -29,11 +29,12 @@ import fr.pizzeria.config.PizzeriaAppJPAConfig;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
+import fr.pizzeria.repos.IPizzaRepository;
 
 @Repository
 @Lazy
 //@Import(PizzeriaAppJPAConfig.class)
-public class PizzaDaoJPASpring implements IPizzaDao {
+public class PizzaDaoSpringData implements IPizzaDao {
 	// private Path repertoire = Paths.get("data");
 	
 //	@Autowired
@@ -43,6 +44,7 @@ public class PizzaDaoJPASpring implements IPizzaDao {
 	/**
 	 * @param entityManagerFactory
 	 */
+	@Autowired private IPizzaRepository pizzarepository;
 	
 
 	private static final String REPERTOIRE_DATA = "data";
@@ -51,50 +53,12 @@ public class PizzaDaoJPASpring implements IPizzaDao {
 
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException, SQLException {
-		//EntityManager em = emf.createEntityManager();
-		List<Pizza> listPizza = em.createQuery("SELECT p FROM Pizza p", Pizza.class).getResultList();
-
-		/**
-		 * Connection connection =
-		 * DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzeria",
-		 * "root", ""); Statement statement = connection.createStatement(); //
-		 * jdbc:mysql://localhost:3306/pizzeria // Connection connection = //
-		 * DriverManager.getConnection(//localhost:3306/pizzeria); ResultSet
-		 * resultats = statement.executeQuery("SELECT * FROM PIZZA");
-		 * List<Pizza> listResultat = new ArrayList<Pizza>();
-		 * 
-		 * while (resultats.next()) {
-		 * 
-		 * Pizza pizza = new Pizza();
-		 * 
-		 * pizza.setCode(resultats.getString("CODE"));
-		 * pizza.setNom(resultats.getString("NOM"));
-		 * pizza.setPrix(resultats.getDouble("PRIX"));
-		 * pizza.setCategorie(CategoriePizza.valueOf(resultats.getString("CATEGORIE")));
-		 * listResultat.add(pizza);
-		 * 
-		 * }
-		 */
-		// List<Pizza> ListResultat = resultats.;
-		/**
-		 * try { return Files.list(repertoire) .map(path -> { Pizza p = new
-		 * Pizza(); p.setCode(path.getFileName().toString().replaceAll(".txt",
-		 * "")); try { String ligne = Files.readAllLines(path).get(0); String[]
-		 * ligneTab = ligne.split(";"); p.setNom(ligneTab[0]);
-		 * p.setPrix(Double.valueOf(ligneTab[1]));
-		 * p.setCategorie(CategoriePizza.valueOf(ligneTab[2])); } catch
-		 * (Exception e) { e.printStackTrace(); }
-		 * 
-		 * return p; }) .collect(Collectors.toList()); } catch (IOException e) {
-		 * throw new DaoException(e); }
-		 */
-		return listPizza;
+		return pizzarepository.findAll();
 	}
 
 	@Override
 	@Transactional
 	public void savePizza(Pizza newPizza) throws DaoException, SQLException {
-		//EntityManager em = emf.createEntityManager();
 		Pizza pizza = null;
 		try {
 			pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code", newPizza.getCode())
@@ -102,18 +66,13 @@ public class PizzaDaoJPASpring implements IPizzaDao {
 			System.err.println("INFO---- Pizza deja presente");
 
 		} catch (NoResultException e) {
-			em.persist(newPizza);
+			pizzarepository.save(newPizza);
 			// System.err.println(newPizza);
 			System.err.println("INFO---- pizza inséré  : " + newPizza);
 			// EntityNotFoundException e
 		}
 
-		// em.persist(newPizza);
-		// System.err.println(newPizza);
-		// et.commit();
-		// em.close();
-
-		// System.err.println(" pizza inséré : " + newPizza);
+		
 
 	}
 
@@ -121,8 +80,9 @@ public class PizzaDaoJPASpring implements IPizzaDao {
 	@Transactional
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
 		//EntityManager em = emf.createEntityManager();
-		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code", codePizza)
-				.getSingleResult();
+		//pizzarepository.
+		Pizza pizza = pizzarepository.findByCode(codePizza);
+		//pizzarepository.save(updatePizza);
 		if (pizza != null) {
 			pizza.setCode(updatePizza.getCode());
 			pizza.setNom(updatePizza.getNom());
@@ -130,7 +90,7 @@ public class PizzaDaoJPASpring implements IPizzaDao {
 			pizza.setCategorie(updatePizza.getCategorie());
 		}
 
-		// em.merge(pizza);
+		pizzarepository.save(pizza);
 		System.err.println("la pizza : " + pizza + "a été mise a jour");
 
 	}
@@ -139,10 +99,13 @@ public class PizzaDaoJPASpring implements IPizzaDao {
 	@Transactional
 	public void deletePizza(String codePizza) throws DaoException, SQLException {
 		//EntityManager em = emf.createEntityManager();
-		Pizza pizza = em.createNamedQuery("pizza.getcode", Pizza.class).setParameter("code", codePizza)
-				.getSingleResult();
-		em.remove(pizza);
-		System.err.println("la pizza : " + pizza + "a été supprimé");
+		Pizza pizza = pizzarepository.findByCode(codePizza);
+		Integer nbPizzaSup = pizzarepository.deleteByCode(codePizza);
+		if (nbPizzaSup == 1) {
+			System.err.println("la pizza : " + pizza + "a été supprimé");
+		} else {
+			System.err.println("echec de la suppresion");
+		}
 
 		/**
 		 * Connection connection =

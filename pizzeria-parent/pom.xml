@@ -119,6 +119,12 @@
 				<artifactId>h2</artifactId>
 				<version>1.4.192</version>
 			</dependency>
+			<!-- http://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jpa</artifactId>
+				<version>1.9.0.RELEASE</version>
+			</dependency>
 
 
 		</dependencies>

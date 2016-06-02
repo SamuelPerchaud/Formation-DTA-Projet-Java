@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.test_implementation;
 
 import static org.junit.Assert.*;
 
