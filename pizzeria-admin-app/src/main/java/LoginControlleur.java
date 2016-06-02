@@ -24,7 +24,7 @@ public class LoginControlleur extends HttpServlet {
 
 	private static final Logger LOG = Logger.getLogger(LoginControlleur.class.toString());
 
-	private IPizzaDao pizzaDao = IPizzaDao.DEFAULT_IMPLEMENTATION;
+	//private IPizzaDao pizzaDao = IPizzaDao.DEFAULT_IMPLEMENTATION;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

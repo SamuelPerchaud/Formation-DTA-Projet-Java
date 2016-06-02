@@ -24,7 +24,7 @@ import fr.pizzeria.model.Pizza;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = PizzaDaoConfigTest.class)
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
-public abstract class PizzaDaoDBSpringTest {
+public abstract class PizzaDaoJPASpringTest {
 
 	private static final int NB_PIZZA_DE_DEPART = 4;
 	@Autowired

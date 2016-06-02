@@ -19,7 +19,7 @@ import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-public class TestPizzaDaoImpl {
+public class PizzaDaoImplTest {
 
 	//private static final Class<? extends Throwable> SavePizzaException = null;
 	private ArrayList<Pizza> pizzasTest;

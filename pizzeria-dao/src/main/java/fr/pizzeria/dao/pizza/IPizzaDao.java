@@ -3,6 +3,8 @@ package fr.pizzeria.dao.pizza;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.commons.lang3.NotImplementedException;
+
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
 
@@ -17,5 +19,9 @@ public interface IPizzaDao {
 	void deletePizza(String codePizza) throws DaoException, SQLException;
 
 	void importPizza() throws DaoException, SQLException;
+	
+	default public void saveAllPizzas(List<Pizza> listPizzas) throws DaoException {
+		throw new NotImplementedException("saveAllPizzas non implémenté");
+	}
 
 }

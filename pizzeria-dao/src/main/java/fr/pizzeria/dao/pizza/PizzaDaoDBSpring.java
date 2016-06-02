@@ -21,9 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -51,10 +53,11 @@ public class PizzaDaoDBSpring implements IPizzaDao {
 	 * 
 	 */
 	@Autowired
-	public PizzaDaoDBSpring(javax.sql.DataSource dataSource) {
+	public PizzaDaoDBSpring(javax.sql.DataSource dataSource, PlatformTransactionManager transactionManager) {
 		super();
 		System.err.println("INFO---- Utilisation du l'implémentation JDBC de Spring");
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		this.txTemplate = new TransactionTemplate(transactionManager);
 	}
 
 	@Override
@@ -105,10 +108,20 @@ public class PizzaDaoDBSpring implements IPizzaDao {
 
 	}
 
+	public Pizza findOnePizza(String code) {
+		try {
+			return this.jdbcTemplate.queryForObject("SELECT * from PIZZA where code=?", new PizzaMapper(), code);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+
 	@Override
 	@Transactional
 	public void importPizza() throws DaoException, SQLException {
 		try {
+			System.out.println(" entré dans l'import");
+
 			pizzas = Files.list(Paths.get(REPERTOIRE_DATA)).map(path -> {
 				Pizza p = new Pizza();
 				p.setCode(path.getFileName().toString().replaceAll(".txt", ""));
@@ -127,11 +140,11 @@ public class PizzaDaoDBSpring implements IPizzaDao {
 		} catch (IOException e) {
 			throw new DaoException(e);
 		}
-		test = ListUtils.partition(pizzas, 3);
-
-		for (List<Pizza> listPizza : test) {
-			batch.savePizzaMultiple(listPizza);
-		}
+		// test = ListUtils.partition(pizzas, 3);
+		saveAllPizzas(pizzas);
+		// for (List<Pizza> listPizza : test) {
+		// batch.savePizzaMultiple(listPizza);
+		// }
 	}
 
 	public class PizzaMapper implements RowMapper<Pizza> {
@@ -146,6 +159,33 @@ public class PizzaDaoDBSpring implements IPizzaDao {
 			pizza.setCategorie(CategoriePizza.valueOf(rs.getString("CATEGORIE")));
 			return pizza;
 		}
+	}
+
+	public void saveAllPizzas(List<Pizza> listPizzas) throws DaoException {
+		ListUtils.partition(listPizzas, 3).forEach(list -> {
+
+			/*
+			 * this.txTemplate.execute(new TransactionCallback<Pizza>() {
+			 * 
+			 * @Override public Pizza doInTransaction(TransactionStatus status)
+			 * { return null; } });
+			 */
+			this.txTemplate.execute(status -> {
+				list.forEach(p -> {
+					try {
+						this.savePizza(p);
+					} catch (DaoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				});
+				return null;
+			});
+
+		});
 	}
 
 }

@@ -29,7 +29,7 @@ public class PizzeriaAppSpringConfig {
 	//
 	@Bean
 	@Qualifier("daoImpl")
-	public IPizzaDao getPizzaDao(@Qualifier("pizzaDaoDBSpring") IPizzaDao pizzaDao) {
+	public IPizzaDao getPizzaDao(@Qualifier("pizzaDaoJPASpring") IPizzaDao pizzaDao) {
 		return pizzaDao;
 	}
 
