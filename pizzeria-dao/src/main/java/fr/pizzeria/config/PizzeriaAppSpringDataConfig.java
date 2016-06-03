@@ -12,11 +12,12 @@ import fr.pizzeria.dao.pizza.IPizzaDao;
 @EnableJpaRepositories("fr.pizzeria.repos")
 @Import(PizzeriaAppJPAConfig.class)
 public class PizzeriaAppSpringDataConfig {
-	
+
 	@Bean
 	@Qualifier("daoImpl")
 	public IPizzaDao getPizzaDao(@Qualifier("pizzaDaoSpringData") IPizzaDao pizzaDao) {
 		return pizzaDao;
 	}
+
 
 }

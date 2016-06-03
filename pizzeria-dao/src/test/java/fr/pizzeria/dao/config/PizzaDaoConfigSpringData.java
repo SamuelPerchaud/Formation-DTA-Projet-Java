@@ -1,9 +1,7 @@
 package fr.pizzeria.dao.config;
 
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,14 +14,14 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import fr.pizzeria.dao.pizza.IPizzaDao;
-import fr.pizzeria.dao.pizza.PizzaDaoJPA;
 import fr.pizzeria.dao.pizza.PizzaDaoJPASpring;
+import fr.pizzeria.dao.pizza.PizzaDaoSpringData;
 
 @Configuration
 //@ComponentScan("fr.pizzeria.dao")
 @EnableTransactionManagement
 @EnableJpaRepositories("fr.pizzeria.repos")
-public class PizzaDaoConfigJPA {
+public class PizzaDaoConfigSpringData {
 
 	@Bean
 	public DataSource dataSource() {
@@ -44,8 +42,8 @@ public class PizzaDaoConfigJPA {
 	}
 
 	@Bean
-	public IPizzaDao pizzaDao(@Qualifier("entityManagerFactory")EntityManagerFactory entityManagerFactory){
-		return new PizzaDaoJPA( entityManagerFactory);
+	public IPizzaDao pizzaDao(){
+		return new PizzaDaoSpringData();
 	}
 	
 	

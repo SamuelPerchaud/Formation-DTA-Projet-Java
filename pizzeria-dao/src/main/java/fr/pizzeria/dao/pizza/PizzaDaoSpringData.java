@@ -33,19 +33,28 @@ import fr.pizzeria.repos.IPizzaRepository;
 
 @Repository
 @Lazy
-//@Import(PizzeriaAppJPAConfig.class)
+// @Import(PizzeriaAppJPAConfig.class)
 public class PizzaDaoSpringData implements IPizzaDao {
 	// private Path repertoire = Paths.get("data");
-	
-//	@Autowired
-	//public EntityManagerFactory emf;
 
-	@PersistenceContext private EntityManager em;
+	// @Autowired
+	// public EntityManagerFactory emf;
+
+	@PersistenceContext
+	private EntityManager em;
 	/**
 	 * @param entityManagerFactory
 	 */
-	@Autowired private IPizzaRepository pizzarepository;
-	
+	@Autowired
+	private IPizzaRepository pizzarepository;
+
+	/**
+	 * 
+	 */
+	public PizzaDaoSpringData() {
+		super();
+		System.err.println("INFO---- Utilisation du l'implémentation Data Spring");
+		}
 
 	private static final String REPERTOIRE_DATA = "data";
 	private static List<Pizza> pizzas = new ArrayList<Pizza>();
@@ -72,17 +81,15 @@ public class PizzaDaoSpringData implements IPizzaDao {
 			// EntityNotFoundException e
 		}
 
-		
-
 	}
 
 	@Override
 	@Transactional
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
-		//EntityManager em = emf.createEntityManager();
-		//pizzarepository.
+		// EntityManager em = emf.createEntityManager();
+		// pizzarepository.
 		Pizza pizza = pizzarepository.findByCode(codePizza);
-		//pizzarepository.save(updatePizza);
+		// pizzarepository.save(updatePizza);
 		if (pizza != null) {
 			pizza.setCode(updatePizza.getCode());
 			pizza.setNom(updatePizza.getNom());
@@ -98,7 +105,7 @@ public class PizzaDaoSpringData implements IPizzaDao {
 	@Override
 	@Transactional
 	public void deletePizza(String codePizza) throws DaoException, SQLException {
-		//EntityManager em = emf.createEntityManager();
+		// EntityManager em = emf.createEntityManager();
 		Pizza pizza = pizzarepository.findByCode(codePizza);
 		Integer nbPizzaSup = pizzarepository.deleteByCode(codePizza);
 		if (nbPizzaSup == 1) {

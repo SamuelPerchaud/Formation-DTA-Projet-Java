@@ -41,6 +41,13 @@ public class PizzaDaoJPASpring implements IPizzaDao {
 
 	@PersistenceContext private EntityManager em;
 	/**
+	 * 
+	 */
+	public PizzaDaoJPASpring() {
+		super();
+		System.err.println("INFO---- Utilisation du l'implémentation JPA Spring");	}
+
+	/**
 	 * @param entityManagerFactory
 	 */
 	

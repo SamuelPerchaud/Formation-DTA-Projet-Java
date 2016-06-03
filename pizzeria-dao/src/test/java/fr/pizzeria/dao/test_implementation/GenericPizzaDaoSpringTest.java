@@ -39,8 +39,10 @@ public abstract class GenericPizzaDaoSpringTest {
 	@Test
 	public void testsavePizza() throws DaoException, SQLException {
 		System.out.println("Pizza de depart : " + NB_PIZZA_DE_DEPART);
-		Pizza testAjout = new Pizza(null, "PEP 1", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE);
-		//List<Pizza> pizzas = pizzaDao.findAllPizzas();
+		Pizza testAjout = new Pizza("PEP 1","test", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE);
+		System.out.println(testAjout);
+		List<Pizza> pizzas = pizzaDao.findAllPizzas();
+		System.out.println(pizzas.size());
 		pizzaDao.savePizza(testAjout);
 		List<Pizza> pizzas2 = pizzaDao.findAllPizzas();
 		System.out.println("nombre de Pizzas après ajout : " + pizzas2.size());

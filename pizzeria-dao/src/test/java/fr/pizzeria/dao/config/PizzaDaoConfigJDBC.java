@@ -21,9 +21,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import fr.pizzeria.config.PizzeriaAppJDBCSpringConfig;
 import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.dao.pizza.PizzaDaoDB;
+import fr.pizzeria.dao.pizza.PizzaDaoJPASpring;
+import fr.pizzeria.dao.test_implementation.PizzaDaoDBSpringTest;
 
 @Configuration
-@ComponentScan("fr.pizzeria.dao")
+//@ComponentScan("fr.pizzeria.dao")
 //@Import(PizzeriaAppJDBCSpringConfig.class)
 public class PizzaDaoConfigJDBC {
 
@@ -38,6 +41,10 @@ public class PizzaDaoConfigJDBC {
 		return new DataSourceTransactionManager(dataSource());
 	}
 	
+	@Bean
+	public IPizzaDao pizzaDao(){
+		return new PizzaDaoDB();
+	}
 	
 
 }

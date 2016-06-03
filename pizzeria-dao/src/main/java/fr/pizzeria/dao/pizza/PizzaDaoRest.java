@@ -29,6 +29,13 @@ public class PizzaDaoRest implements IPizzaDao {
 
 	
 	private static List<Pizza> pizzas = new ArrayList<Pizza>();
+	/**
+	 * 
+	 */
+	public PizzaDaoRest() {
+		super();
+		System.err.println("INFO---- Utilisation du l'implémentation REST");	}
+
 	private static List<List<Pizza>> test = new ArrayList<List<Pizza>>();
 
 	@Override

@@ -30,7 +30,7 @@ public class Menu {
 	private Scanner sc;
 	
 	@Autowired
-	public Menu(Scanner sc, @Qualifier("daoImpl") IPizzaDao pizzaDao) {
+	public Menu(Scanner sc, /*@Qualifier("pizzaDaoSpringData")*/ IPizzaDao pizzaDao) {
 		super();
 		initialiserOptions(sc, pizzaDao);
 		this.sc = sc;

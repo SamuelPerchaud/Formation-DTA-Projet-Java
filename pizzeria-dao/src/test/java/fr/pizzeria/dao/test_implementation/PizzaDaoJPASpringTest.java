@@ -11,7 +11,7 @@ import fr.pizzeria.dao.pizza.IPizzaDao;
 public class PizzaDaoJPASpringTest extends GenericPizzaDaoSpringTest {
 	
 	@Autowired
-	public void setPizzaDao(@Qualifier("pizzaDaoJPASpring") IPizzaDao pizzaDao) {
+	public void setPizzaDao(/*@Qualifier("pizzaDaoJPASpring")*/ IPizzaDao pizzaDao) {
 		this.pizzaDao = pizzaDao;
 	}
 

@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `pizza`;
 CREATE TABLE IF NOT EXISTS `pizza` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `categorie` varchar(255) DEFAULT NULL,

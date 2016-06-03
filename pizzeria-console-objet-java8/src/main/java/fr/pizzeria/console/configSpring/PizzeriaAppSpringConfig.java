@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -22,11 +23,13 @@ import fr.pizzeria.config.PizzeriaAppSpringDataConfig;
 import fr.pizzeria.dao.pizza.BatchPizzaJdbcTemplate;
 import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.dao.pizza.PizzaDaoRest;
+import fr.pizzeria.dao.pizza.PizzaDaoSpringData;
 
 @Configuration
-@ComponentScan({"fr.pizzeria.dao","fr.pizzeria.ihm"})
+@ComponentScan({"fr.pizzeria.ihm","fr.pizzeria.aspects"})//"fr.pizzeria.dao"
 @EnableTransactionManagement
 @Import(PizzeriaAppSpringDataConfig.class)
+@EnableAspectJAutoProxy
 public class PizzeriaAppSpringConfig {
 
 	@Bean
@@ -38,6 +41,11 @@ public class PizzeriaAppSpringConfig {
 	@Bean
 	public Scanner getScanner() {
 		return new Scanner(System.in);
+	}
+	
+	@Bean
+	public IPizzaDao pizzaDao() {
+		return new PizzaDaoSpringData();
 	}
 
 

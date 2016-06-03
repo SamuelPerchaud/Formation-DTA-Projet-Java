@@ -20,7 +20,6 @@ public class ListerPizzaOptionMenu extends AbstractOptionMenu {
 	@Override
 	public boolean execute() throws DaoException, SQLException {
 		
-		
 		pizzaDao.findAllPizzas().stream()
 		.sorted(Comparator.comparing(Pizza::getPrix))
 		

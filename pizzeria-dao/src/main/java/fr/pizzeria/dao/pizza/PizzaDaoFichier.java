@@ -16,6 +16,17 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoFichier implements IPizzaDao {
 	private static final String REPERTOIRE_DATA = "data";
+	
+	
+	
+	/**
+	 * 
+	 */
+	public PizzaDaoFichier() {
+		super();
+		System.err.println("INFO---- Utilisation du l'implémentation fichier");	
+		}
+
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException {
 		
