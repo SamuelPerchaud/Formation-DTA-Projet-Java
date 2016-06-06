@@ -19,6 +19,7 @@ public class webAppInitializer implements WebApplicationInitializer {
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		// TODO Auto-generated method stub
 	AnnotationConfigWebApplicationContext webContext = new AnnotationConfigWebApplicationContext();
+	
 	webContext.register(PizzeriaSpringConfig.class);
 		
 	ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(webContext));

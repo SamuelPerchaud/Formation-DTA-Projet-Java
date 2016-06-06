@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import fr.pizzeria.dao.pizza.BatchPizzaJdbcTemplate;
 import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.dao.pizza.PizzaDaoDBSpring;
 import fr.pizzeria.dao.pizza.PizzaDaoRest;
 
 @Configuration
@@ -26,11 +27,9 @@ import fr.pizzeria.dao.pizza.PizzaDaoRest;
 @EnableTransactionManagement
 public class PizzeriaAppJDBCSpringConfig {
 
-	//
 	@Bean
-	@Qualifier("daoImpl")
-	public IPizzaDao getPizzaDao(@Qualifier("pizzaDaoDBSpring") IPizzaDao pizzaDao) {
-		return pizzaDao;
+	public IPizzaDao getPizzaDao(DataSource dataSource, PlatformTransactionManager transactionManager) {
+		return new PizzaDaoDBSpring(dataSource, transactionManager);
 	}
 
 	@Bean
@@ -48,12 +47,10 @@ public class PizzeriaAppJDBCSpringConfig {
 	public DataSource dataSource() {
 		return new DriverManagerDataSource("jdbc:mysql://localhost:3306/pizzeria", "root", "");
 	}
-		
+
 	@Bean
-	public PlatformTransactionManager txManager(){
+	public PlatformTransactionManager txManager() {
 		return new DataSourceTransactionManager(dataSource());
 	}
-	
-	
-	
+
 }

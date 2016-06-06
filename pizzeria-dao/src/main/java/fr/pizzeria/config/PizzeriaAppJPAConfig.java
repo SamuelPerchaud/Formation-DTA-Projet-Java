@@ -20,42 +20,41 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import fr.pizzeria.dao.pizza.BatchPizzaJdbcTemplate;
 import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.dao.pizza.PizzaDaoJPA;
+import fr.pizzeria.dao.pizza.PizzaDaoJPASpring;
 import fr.pizzeria.dao.pizza.PizzaDaoRest;
 
 @Configuration
-@ComponentScan("fr.pizzeria.dao")
+// @ComponentScan("fr.pizzeria.dao")
 @EnableTransactionManagement
 public class PizzeriaAppJPAConfig {
 
-/*
+	@Bean
+	public IPizzaDao getPizzaDao(EntityManagerFactory emf) {
+		return new PizzaDaoJPA(emf);
+	}
+
 	@Bean
 	@Lazy
 	public EntityManagerFactory getEmf() {
-		return javax.persistence.Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");
+		return javax.persistence.Persistence.createEntityManagerFactory("pizzeria-pu");
 	}
 
 	@Bean
 	public Scanner getScanner() {
 		return new Scanner(System.in);
 	}
-*/
+
 	@Bean
 	public DataSource dataSource() {
 		return new DriverManagerDataSource("jdbc:mysql://localhost:3306/pizzeria", "root", "");
 	}
-		
+
 	@Bean
-    public PlatformTransactionManager transactionManager() {
-        return new JpaTransactionManager();
-    }
-	
-	//
-	@Bean
-	@Qualifier("daoImpl")
-	public IPizzaDao getPizzaDao(@Qualifier("pizzaDaoJPASpring") IPizzaDao pizzaDao) {
-		return pizzaDao;
+	public PlatformTransactionManager transactionManager() {
+		return new JpaTransactionManager();
 	}
 
+	//
 
-	
 }

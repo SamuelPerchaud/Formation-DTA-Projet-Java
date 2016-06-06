@@ -10,6 +10,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import fr.pizzeria.exception.*;
 //import fr.pizzeria.exception.DeletePizzaException;
@@ -18,7 +19,8 @@ import fr.pizzeria.exception.*;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-
+@Repository
+@Lazy
 //@Qualifier("PizzaDaoImpl")
 public class PizzaDaoImpl implements IPizzaDao {
 	
