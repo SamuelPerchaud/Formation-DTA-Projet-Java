@@ -10,12 +10,17 @@
 		<module>../pizzeria-console-objet-java8</module>
 		<module>../pizzeria-dao</module>
 		<module>../pizzeria-model</module>
+		
+		<module>../pizzeria-admin-app</module>
+		<module>../pizzria-spring-web</module>
 	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.12</junit.version>
+		<spring.security.version>4.1.0.RELEASE</spring.security.version>
 	</properties>
+
 
 
 
@@ -125,7 +130,16 @@
 				<artifactId>spring-data-jpa</artifactId>
 				<version>1.9.0.RELEASE</version>
 			</dependency>
-
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
@@ -140,7 +154,7 @@
 					<artifactId>maven-dependency-plugin</artifactId>
 					<version>2.9</version>
 				</plugin>
-					<plugin>
+				<plugin>
 					<artifactId>maven-war-plugin</artifactId>
 					<configuration>
 						<failOnMissingWebXml>false</failOnMissingWebXml>

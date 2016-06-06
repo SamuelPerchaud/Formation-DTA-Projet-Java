@@ -60,13 +60,13 @@
     <profile>
       <id>dev</id>
       <properties>
-        <dao.impl>0</dao.impl>
+        <dao.profile>0</dao.profile>
       </properties>
     </profile>
     <profile>
       <id>prod</id>
       <properties>
-        <dao.impl>1</dao.impl>
+        <dao.profile>1</dao.profile>
       </properties>
     </profile>
   </profiles>
