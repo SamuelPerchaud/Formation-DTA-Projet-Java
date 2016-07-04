@@ -1,0 +1,49 @@
+ul li  {
+ display:inline;
+
+ width:100px;
+ color:black;
+ text-decoration:none;
+ text-align:center;
+ padding:px;
+ border:px solid;
+ /*pour avoir un effet "outset" avec IE :*/
+ /*border-color:#DCDCDC #696969 #696969 #DCDCDC;*/
+ }
+li a {
+ width:100px;
+ background-color:darkgreen;
+ color:black;
+ text-decoration:none;
+ text-align:center;
+ padding:5px;
+ border:1px solid;
+ /*pour avoir un effet "outset" avec IE :*/
+ /*border-color:#DCDCDC #696969 #696969 #DCDCDC;*/
+ }
+ul li a:hover {
+ background-color: red;
+ border:2px solid;
+text-decoration: underline;
+ /*border-color:#696969 #DCDCDC #DCDCDC #696969;*/
+ }
+
+h2{
+     color:aqua;
+
+    
+}
+h1{
+     color:orangered;
+
+    
+}
+article p {
+    color:chocolae;
+}
+article h1 {
+    color:brown;
+}
+#lien a{
+    color:aqua;
+}
